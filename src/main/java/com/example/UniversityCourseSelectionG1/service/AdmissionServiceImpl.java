@@ -1,5 +1,6 @@
 package com.example.UniversityCourseSelectionG1.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +53,7 @@ public class AdmissionServiceImpl implements AdmissionService {
 		// TODO Auto-generated method stub
 		if(admissionRepo.existsById(id)) {
 			admissionRepo.deleteById(id);
-			return "ID"+id+"deleted";
+			return "Deleted";
 		}
 		throw new NotFoundException();
 	}
@@ -62,5 +63,7 @@ public class AdmissionServiceImpl implements AdmissionService {
 		// TODO Auto-generated method stub
 		return admissionRepo.findByCourseId(cId);
 	}
+
+	
 	
 }
