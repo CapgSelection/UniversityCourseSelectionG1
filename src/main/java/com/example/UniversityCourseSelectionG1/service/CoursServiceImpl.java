@@ -2,14 +2,17 @@ package com.example.UniversityCourseSelectionG1.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.UniversityCourseSelectionG1.exception.NotFoundException;
 import com.example.UniversityCourseSelectionG1.entities.Course;
 import com.example.UniversityCourseSelectionG1.repository.CourseRepository;
 
 @Service
 public class CoursServiceImpl implements CourseService {
 
+	@Autowired
 	CourseRepository courseRepo;
 	@Override
 	public Course addCourse(Course course) {
@@ -20,7 +23,17 @@ public class CoursServiceImpl implements CourseService {
 	@Override
 	public Course removeCourse(int courseId) {
 		// TODO Auto-generated method stub
-		return null;
+		Course deletedCourse = null;
+		if(courseRepo.existsById(courseId)) {
+			deletedCourse = courseRepo.findById(courseId).get();
+			deletedCourse.setStatus("INACTIVE");
+			courseRepo.save(deletedCourse);
+			return deletedCourse;
+		}
+		else {
+			throw new NotFoundException("Course with id: "+courseId+" not found!");
+		}
+	
 	}
 
 	@Override
@@ -29,7 +42,9 @@ public class CoursServiceImpl implements CourseService {
 		if(courseRepo.existsById(course.getCourseId())) {
 			return courseRepo.save(course);
 		}
-		return null;
+		else {
+			throw new NotFoundException("Course with id: "+course.getCourseId()+" not found!");
+		}
 	}
 
 	@Override
@@ -38,7 +53,9 @@ public class CoursServiceImpl implements CourseService {
 		if(courseRepo.existsById(courseId)) {
 			return courseRepo.findById(courseId).get();
 		}
-		return null;
+		else {
+			throw new NotFoundException("Course with id: "+courseId+" not found!");
+		}
 	}
 
 	@Override

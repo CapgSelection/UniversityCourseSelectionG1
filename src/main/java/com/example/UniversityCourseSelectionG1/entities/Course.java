@@ -23,4 +23,9 @@ public class Course {
 	private LocalDate courseEndDate;
 	private String courseFees;
 	private double courseCriteria;
+	private String status;
+	
+	public Course() {
+		status="ACTIVE";
+	}
 }
