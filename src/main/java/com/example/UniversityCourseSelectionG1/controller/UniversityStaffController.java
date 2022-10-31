@@ -2,6 +2,7 @@ package com.example.UniversityCourseSelectionG1.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,14 +14,20 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.UniversityCourseSelectionG1.entities.Course;
 import com.example.UniversityCourseSelectionG1.entities.UniversityStaffMember;
+import com.example.UniversityCourseSelectionG1.service.CourseService;
 import com.example.UniversityCourseSelectionG1.service.UniversityStaffMemberService;
 
 @RestController
 @RequestMapping("/uni/staff")
 public class UniversityStaffController {
 	
+	@Autowired
 	private UniversityStaffMemberService usmService;
+	
+	@Autowired
+	private CourseService courseService;
 	
 	@PostMapping("/add")
 	public ResponseEntity<UniversityStaffMember> addStaff(@RequestBody UniversityStaffMember usm) {
@@ -52,7 +59,22 @@ public class UniversityStaffController {
 		return new ResponseEntity<String>("Staff with id: "+id+" deleted successfully!", HttpStatus.OK);
 	}
 	
+	@PostMapping("/course/add")
+	public ResponseEntity<Course> addCourse(@RequestBody Course course) {
+		Course savedCourse = courseService.addCourse(course);
+		return new ResponseEntity<>(savedCourse, HttpStatus.CREATED);
+	}
 	
+	@PutMapping("/course/update")
+	public ResponseEntity<Course> updateCourse(@RequestBody Course course) {
+		Course updatedourse = courseService.updateCourse(course);
+		return new ResponseEntity<>(updatedourse, HttpStatus.OK);
+	}
 	
+	@DeleteMapping("/course/delete/{id}")
+	public ResponseEntity<String> deleteCourseById(@PathVariable int id) {
+		courseService.removeCourse(id);
+		return new ResponseEntity<>("Course with id: "+id+" deleted successfully!",HttpStatus.OK);
+	}
 	
 }
