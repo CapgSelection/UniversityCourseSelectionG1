@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.UniversityCourseSelectionG1.entities.AdmissionCommiteeMember;
+import com.example.UniversityCourseSelectionG1.exception.NotFoundException;
 import com.example.UniversityCourseSelectionG1.repository.AdmissionCommiteeMemberRepository;
 
 @Service
@@ -22,7 +23,15 @@ public class AdmissionCommiteeMemeberServiceImpl implements AdmissionCommiteeMem
 
 	@Override
 	public AdmissionCommiteeMember updateCommiteeMember(AdmissionCommiteeMember member) {
-		return repo.save(member);
+		
+		if(repo.existsById(member.getAdminId()))
+		{
+			return repo.save(member);
+		}
+		else
+		{
+			throw new NotFoundException("AdmissionCommiteeMember not available");
+		}
 	}
 
 	@Override
@@ -31,6 +40,10 @@ public class AdmissionCommiteeMemeberServiceImpl implements AdmissionCommiteeMem
 		if(repo.existsById(id))
 		{
 			mem=repo.findById(id).get();
+		}
+		else
+		{
+			throw new NotFoundException("AdmissionCommiteeMember not found");
 		}
 		return mem;
 	}
@@ -42,11 +55,19 @@ public class AdmissionCommiteeMemeberServiceImpl implements AdmissionCommiteeMem
 		{
 			repo.deleteById(id);
 		}
+		else
+		{
+			throw new NotFoundException("No member exists with id: "+id);
+		}
 	}
 
 	@Override
 	public List<AdmissionCommiteeMember> viewAllCommiteeMembers() {
 		List<AdmissionCommiteeMember> allMembers=repo.findAll();
+		if(allMembers.isEmpty())
+		{
+			throw new NotFoundException("No AdmissionCommiteeMember found");
+		}
 		return allMembers;
 	}
 
