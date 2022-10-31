@@ -2,10 +2,12 @@ package com.example.UniversityCourseSelectionG1.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.example.UniversityCourseSelectionG1.entities.AdmissionCommiteeMember;
 import com.example.UniversityCourseSelectionG1.repository.AdmissionCommiteeMemberRepository;
 
+@Service
 public class AdmissionCommiteeMemeberServiceImpl implements AdmissionCommiteeMemberService {
 
 	@Autowired
@@ -44,8 +46,8 @@ public class AdmissionCommiteeMemeberServiceImpl implements AdmissionCommiteeMem
 
 	@Override
 	public List<AdmissionCommiteeMember> viewAllCommiteeManager() {
-		// TODO Auto-generated method stub
-		return null;
+		List<AdmissionCommiteeMember> allMembers=repo.findAll();
+		return allMembers;
 	}
 
 }
