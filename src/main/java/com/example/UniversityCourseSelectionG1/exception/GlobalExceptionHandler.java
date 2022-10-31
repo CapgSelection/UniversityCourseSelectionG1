@@ -9,14 +9,16 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class GlobalExceptionHandler {
 
 	@ExceptionHandler(value=NotFoundException.class)
-	public ResponseEntity<String> handleNotFoundException(NotFoundException e)
+	public ResponseEntity<ExceptionDescription> handleNotFoundException(NotFoundException e)
 	{
-		return new ResponseEntity<String>("Not found", HttpStatus.NOT_FOUND);
+		ExceptionDescription desc=new ExceptionDescription(e.getMessage());
+		return new ResponseEntity<ExceptionDescription>(desc, HttpStatus.NOT_FOUND);
 	}
 	
 	@ExceptionHandler(value=NotLoggedInException.class)
-	public ResponseEntity<String> handleNotLoggedInException(NotLoggedInException e)
+	public ResponseEntity<ExceptionDescription> handleNotLoggedInException(NotLoggedInException e)
 	{
-		return new ResponseEntity<String>("Not logged in", HttpStatus.FORBIDDEN);
+		ExceptionDescription desc=new ExceptionDescription(e.getMessage());
+		return new ResponseEntity<ExceptionDescription>(desc, HttpStatus.FORBIDDEN);
 	}
 }

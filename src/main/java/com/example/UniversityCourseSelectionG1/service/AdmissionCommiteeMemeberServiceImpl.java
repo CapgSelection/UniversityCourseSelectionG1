@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.UniversityCourseSelectionG1.entities.AdmissionCommiteeMember;
+import com.example.UniversityCourseSelectionG1.exception.NotFoundException;
 import com.example.UniversityCourseSelectionG1.repository.AdmissionCommiteeMemberRepository;
 
 @Service
@@ -22,7 +23,15 @@ public class AdmissionCommiteeMemeberServiceImpl implements AdmissionCommiteeMem
 
 	@Override
 	public AdmissionCommiteeMember updateCommiteeMember(AdmissionCommiteeMember member) {
-		return repo.save(member);
+		
+		if(repo.existsById(member.getAdminId()))
+		{
+			return repo.save(member);
+		}
+		else
+		{
+			throw new NotFoundException("Commitee Member not found");
+		}
 	}
 
 	@Override
