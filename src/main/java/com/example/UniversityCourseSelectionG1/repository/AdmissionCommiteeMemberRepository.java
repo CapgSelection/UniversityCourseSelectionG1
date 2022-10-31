@@ -9,6 +9,6 @@ import com.example.UniversityCourseSelectionG1.entities.AdmissionCommiteeMember;
 public interface AdmissionCommiteeMemberRepository extends JpaRepository<AdmissionCommiteeMember, Integer>
 {
 
-	@Query("Select * from admission_commitee_member where admin_id=:id and admin_password=:password")
-	AdmissionCommiteeMember verifyAdmissionCommiteeMember(@Param("id") int id, @Param("password") String password);
+	@Query(value="Select * from admission_committee_member where admin_id=?1 and admin_password=?2", nativeQuery=true)
+	AdmissionCommiteeMember verifyAdmissionCommiteeMember(int id, String password);
 }
