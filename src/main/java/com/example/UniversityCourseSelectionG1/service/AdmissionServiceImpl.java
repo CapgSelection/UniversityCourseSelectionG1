@@ -21,7 +21,7 @@ public class AdmissionServiceImpl implements AdmissionService {
 	@Autowired
 	private CourseRepository courseRepo;
 	@Override
-	public void addAddmission(Admission admission) {
+	public void addAddmission(Admission admission) throws NotFoundException{
 		// TODO Auto-generated method stub
 		if((!courseRepo.existsById(admission.getCourseId())) || (!applicantRepo.existsById(admission.getApplicantId()))) {
 			throw new NotFoundException();
@@ -47,4 +47,20 @@ public class AdmissionServiceImpl implements AdmissionService {
 		return "Deleted Successfully";
 	}
 
+	@Override
+	public String delAdmissionsById(int id) throws NotFoundException {
+		// TODO Auto-generated method stub
+		if(admissionRepo.existsById(id)) {
+			admissionRepo.deleteById(id);
+			return "ID"+id+"deleted";
+		}
+		throw new NotFoundException();
+	}
+
+	@Override
+	public List<Admission> getAdmissionbyCourse(int cId) {
+		// TODO Auto-generated method stub
+		return admissionRepo.findByCourseId(cId);
+	}
+	
 }
