@@ -10,7 +10,7 @@ import com.example.UniversityCourseSelectionG1.entities.Admission;
 
 public interface AdmissionRepository extends JpaRepository<Admission,Integer>{
 
-	@Query("select c from Admission where c.course_Id=:cId")
+	@Query("select c from Admission c where c.course_Id=:cId")
 	List<Admission> findByCourseId(@Param("cId")int cId);
 
 }
