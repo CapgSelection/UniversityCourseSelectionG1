@@ -30,7 +30,7 @@ public class AdmissionCommiteeMemeberServiceImpl implements AdmissionCommiteeMem
 		}
 		else
 		{
-			throw new NotFoundException("Commitee Member not found");
+			throw new NotFoundException("AdmissionCommiteeMember not available");
 		}
 	}
 
@@ -40,6 +40,10 @@ public class AdmissionCommiteeMemeberServiceImpl implements AdmissionCommiteeMem
 		if(repo.existsById(id))
 		{
 			mem=repo.findById(id).get();
+		}
+		else
+		{
+			throw new NotFoundException("AdmissionCommiteeMember not found");
 		}
 		return mem;
 	}
@@ -51,11 +55,19 @@ public class AdmissionCommiteeMemeberServiceImpl implements AdmissionCommiteeMem
 		{
 			repo.deleteById(id);
 		}
+		else
+		{
+			throw new NotFoundException("No member exists with id: "+id);
+		}
 	}
 
 	@Override
 	public List<AdmissionCommiteeMember> viewAllCommiteeMembers() {
 		List<AdmissionCommiteeMember> allMembers=repo.findAll();
+		if(allMembers.isEmpty())
+		{
+			throw new NotFoundException("No AdmissionCommiteeMember found");
+		}
 		return allMembers;
 	}
 
