@@ -31,7 +31,7 @@ public class CoursServiceImpl implements CourseService {
 			return deletedCourse;
 		}
 		else {
-			throw new NotFoundException("Course with id: "+courseId+" not found!");
+			throw new NotFoundException("Course with id: "+courseId+" not found!!!");
 		}
 	
 	}
@@ -43,7 +43,7 @@ public class CoursServiceImpl implements CourseService {
 			return courseRepo.save(course);
 		}
 		else {
-			throw new NotFoundException("Course with id: "+course.getCourseId()+" not found!");
+			throw new NotFoundException("Course with id: "+course.getCourseId()+" not found!!!");
 		}
 	}
 
@@ -54,7 +54,7 @@ public class CoursServiceImpl implements CourseService {
 			return courseRepo.findById(courseId).get();
 		}
 		else {
-			throw new NotFoundException("Course with id: "+courseId+" not found!");
+			throw new NotFoundException("Course with id: "+courseId+" not found!!!");
 		}
 	}
 
