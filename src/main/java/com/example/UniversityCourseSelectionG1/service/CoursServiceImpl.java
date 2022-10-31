@@ -2,9 +2,12 @@ package com.example.UniversityCourseSelectionG1.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.example.UniversityCourseSelectionG1.entities.Course;
 import com.example.UniversityCourseSelectionG1.repository.CourseRepository;
 
+@Service
 public class CoursServiceImpl implements CourseService {
 
 	CourseRepository courseRepo;
