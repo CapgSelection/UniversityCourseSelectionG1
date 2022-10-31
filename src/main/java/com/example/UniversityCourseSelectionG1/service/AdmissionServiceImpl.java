@@ -36,13 +36,15 @@ public class AdmissionServiceImpl implements AdmissionService {
 	@Override
 	public List<Admission> getAdmissions() {
 		// TODO Auto-generated method stub
-		return null;
+		List<Admission> list=admissionRepo.findAll();
+		return list;
 	}
 
 	@Override
 	public String delAdmissions() {
 		// TODO Auto-generated method stub
-		return null;
+		admissionRepo.deleteAll();
+		return "Deleted Successfully";
 	}
 
 }

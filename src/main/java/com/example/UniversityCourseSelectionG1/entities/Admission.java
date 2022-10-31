@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -27,10 +28,10 @@ public class Admission {
 	@Column(name="admission_Date")
 	@JsonFormat(pattern = "dd-MMM-yyyy")
 	private LocalDate admissionDate;
-	
+	private AdmissionStatus status;
 	
 	public Admission() {
-		super();
+		status=AdmissionStatus.PENDING;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -41,6 +42,7 @@ public class Admission {
 		this.courseId = courseId;
 		this.applicantId = applicantId;
 		this.admissionDate = admissionDate;
+		this.status=AdmissionStatus.PENDING;
 	}
 
 
@@ -77,7 +79,6 @@ public class Admission {
 	public LocalDate getAdmissionDate() {
 		return admissionDate;
 	}
-
 
 	public void setAdmissionDate(LocalDate admissionDate) {
 		this.admissionDate = admissionDate;
