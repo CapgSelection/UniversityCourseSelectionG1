@@ -45,7 +45,7 @@ public class AdmissionCommiteeMemeberServiceImpl implements AdmissionCommiteeMem
 	}
 
 	@Override
-	public List<AdmissionCommiteeMember> viewAllCommiteeManager() {
+	public List<AdmissionCommiteeMember> viewAllCommiteeMembers() {
 		List<AdmissionCommiteeMember> allMembers=repo.findAll();
 		return allMembers;
 	}
