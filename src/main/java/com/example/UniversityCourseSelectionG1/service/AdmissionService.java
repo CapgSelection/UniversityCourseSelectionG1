@@ -17,4 +17,6 @@ public interface AdmissionService {
 	String delAdmissionsById(int id)throws NotFoundException ;
 
 	List<Admission> getAdmissionbyCourse(int cId);
+
+	List<Admission> showAllAdmissionbyDate(LocalDate localdate);
 }

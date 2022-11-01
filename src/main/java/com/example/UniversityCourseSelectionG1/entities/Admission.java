@@ -9,6 +9,10 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 
 
 @Entity
@@ -23,8 +27,12 @@ public class Admission {
 	@Column(name="applicant_Id")
 	private int applicantId;
 	@Column(name="admission_Date")
+	@JsonDeserialize(using = LocalDateDeserializer.class)  
+	@JsonSerialize(using = LocalDateSerializer.class)
 	@JsonFormat(pattern = "dd-MMM-yyyy")
 	private LocalDate admissionDate;
+	
+
 	private AdmissionStatus status;
 	
 	public Admission() {
@@ -80,5 +88,12 @@ public class Admission {
 	public void setAdmissionDate(LocalDate admissionDate) {
 		this.admissionDate = admissionDate;
 	}
+	//added
+	public AdmissionStatus getStatus() {
+		return status;
+	}
 
+	public void setStatus(AdmissionStatus status) {
+		this.status =status;
+	}
 }
