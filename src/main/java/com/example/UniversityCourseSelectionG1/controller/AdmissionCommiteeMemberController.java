@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.capgemini.UniversityCourseSelection.services.IApplicantService;
 import com.example.UniversityCourseSelectionG1.entities.Admission;
 import com.example.UniversityCourseSelectionG1.entities.AdmissionCommiteeMember;
 import com.example.UniversityCourseSelectionG1.entities.AdmissionStatus;
@@ -69,7 +68,7 @@ public class AdmissionCommiteeMemberController
 	@GetMapping("/getResult/{id}")
 	public ResponseEntity<AdmissionStatus> provideAdmissionResult(@PathVariable int id)
 	{
-		Applicant applicant=applicantService.viewApplicant(id).get();
+		Applicant applicant=applicantService.getById(id).get();
 		Admission admission=applicant.getAdmission();
 		
 		AdmissionStatus status=AdmissionServ.provideAdmissionResult(applicant, admission);
