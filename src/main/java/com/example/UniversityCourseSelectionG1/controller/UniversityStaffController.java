@@ -22,7 +22,7 @@ import com.example.UniversityCourseSelectionG1.service.UniversityStaffMemberServ
 @RestController
 @RequestMapping("/uni/staff")
 public class UniversityStaffController {
-	
+	//commit test
 	@Autowired
 	private UniversityStaffMemberService usmService;
 	
