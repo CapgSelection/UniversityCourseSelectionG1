@@ -56,6 +56,16 @@ public class AdmissionController {
 		return new ResponseEntity<List<Admission>>(admissions,HttpStatus.OK);
 	}
 	
-
+	@GetMapping("/allbyDate/{date}/{month}/{year}")
+    public ResponseEntity<List<Admission>> showAllAdmissionByDate(@PathVariable String date,@PathVariable String month,@PathVariable String year){
+		
+		DateTimeFormatter dTF = new DateTimeFormatterBuilder().parseCaseInsensitive()
+	            .appendPattern("dd-MMM-yyyy")
+	            .toFormatter();
+		String datestring  = date+"-"+month+"-"+year;
+		LocalDate localdate  = LocalDate.parse(datestring,dTF);
+		List<Admission> ref = admissionServ.showAllAdmissionbyDate(localdate);
+		return new ResponseEntity<>(ref, HttpStatus.OK);
+	}
 }
 

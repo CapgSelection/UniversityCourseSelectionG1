@@ -30,16 +30,21 @@ public class Applicant {
 	
 	@Column(name= "Password")
 	String password;
+<<<<<<< HEAD
+	Admission admission;
+	AdmissionStatus status;
+=======
 
 
 //	Admission admission;
 //	AdmissionStatus status;
+>>>>>>> branch 'main' of https://github.com/CapgSelection/UniversityCourseSelectionG1
 
 
 	
 	public Applicant() {
 		super();
-		// TODO Auto-generated constructor stub
+		status = AdmissionStatus.APPLIED;
 	}
 	
 	public Applicant(int applicantId, String applicantName, long mobileNumber, String applicantDegree,
@@ -51,15 +56,26 @@ public class Applicant {
 		this.applicantDegree = applicantDegree;
 		this.applicantGraduation = applicantGraduation;
 		this.password = password;
+<<<<<<< HEAD
+		this.admission = admission;
+		this.status = status;
+=======
 //		this.admission = admission;
 //		this.status = status;
 
+>>>>>>> branch 'main' of https://github.com/CapgSelection/UniversityCourseSelectionG1
 	}
 
 
+<<<<<<< HEAD
+	public Admission getAdmission() {
+		return admission;
+	}
+=======
 //	public void setAdmission(Admission admission) {
 //		this.admission = admission;
 //	}
+>>>>>>> branch 'main' of https://github.com/CapgSelection/UniversityCourseSelectionG1
 
 	//public void setAdmission(Admission admission) {
 		//this.admission = admission;
@@ -67,14 +83,19 @@ public class Applicant {
 
 
 
-//	public AdmissionStatus getStatus() {
-//		return status;
-//	}
-//
-//
-//	public void setStatus(AdmissionStatus status) {
-//		this.status = status;
-//	}
+	public void setAdmission(Admission admission) {
+		this.admission = admission;
+	}
+
+
+	public AdmissionStatus getStatus() {
+		return status;
+	}
+
+
+	public void setStatus(AdmissionStatus status) {
+		this.status = status;
+	}
 
 
 
