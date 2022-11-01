@@ -20,7 +20,9 @@ public class UniversityStaffMemberServiceImpl implements UniversityStaffMemberSe
 
 	@Override
 	public UniversityStaffMember addStaff(UniversityStaffMember usm) {
-		return staffRepo.save(usm);
+		UniversityStaffMember savedUSM =  staffRepo.save(usm);
+		savedUSM.setPassword("******");
+		return savedUSM;
 	}
 
 	@Override
