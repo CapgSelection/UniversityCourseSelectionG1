@@ -32,8 +32,11 @@ public class Applicant {
 	
 	@Column(name= "Password")
 	String password;
+
+
 //	Admission admission;
 //	AdmissionStatus status;
+
 
 	
 	public Applicant() {
@@ -52,17 +55,18 @@ public class Applicant {
 		this.password = password;
 //		this.admission = admission;
 //		this.status = status;
+
 	}
 
 
-//	public Admission getAdmission() {
-//		return admission;
-//	}
-//
-//
 //	public void setAdmission(Admission admission) {
 //		this.admission = admission;
 //	}
+
+	//public void setAdmission(Admission admission) {
+		//this.admission = admission;
+	//}
+
 
 
 //	public AdmissionStatus getStatus() {
@@ -73,6 +77,7 @@ public class Applicant {
 //	public void setStatus(AdmissionStatus status) {
 //		this.status = status;
 //	}
+
 
 
 	public int getApplicantId() {
