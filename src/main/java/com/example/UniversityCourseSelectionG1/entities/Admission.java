@@ -93,7 +93,7 @@ public class Admission {
 		return status;
 	}
 
-	public void setStatus() {
-		this.status =AdmissionStatus.PENDING;
+	public void setStatus(AdmissionStatus status) {
+		this.status =status;
 	}
 }
