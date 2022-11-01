@@ -39,8 +39,9 @@ public class Applicant {
 	@Column(name= "Password")
 	String password;
 
-	@OneToOne(targetEntity = Admission.class,cascade = CascadeType.ALL)
-	@JoinColumn(name = "ID", referencedColumnName = "ID")
+//	@OneToOne(targetEntity = Admission.class,cascade = CascadeType.ALL)
+//	@JoinColumn(name = "ID", referencedColumnName = "ID")
+	@OneToOne
 	Admission admission;
 	AdmissionStatus status;
 
