@@ -34,7 +34,8 @@ public class Admission {
 	@JsonSerialize(using = LocalDateSerializer.class)
 	@JsonFormat(pattern = "dd-MMM-yyyy")
 	private LocalDate admissionDate;
-	
+
+//	not needed
 //	@OneToOne(mappedBy = "admission")
 //	private Applicant applicant;
 	private AdmissionStatus status;
