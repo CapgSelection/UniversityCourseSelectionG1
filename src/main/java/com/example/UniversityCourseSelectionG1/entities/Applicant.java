@@ -9,6 +9,8 @@ import javax.persistence.Table;
 
 @Entity
 
+@Table(name = "Applicant1")
+
 public class Applicant {
 	
 	@Id
