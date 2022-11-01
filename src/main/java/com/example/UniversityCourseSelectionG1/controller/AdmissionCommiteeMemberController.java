@@ -34,35 +34,35 @@ public class AdmissionCommiteeMemberController
 	@PostMapping("/add")
 	public ResponseEntity<AdmissionCommiteeMember> addCommiteeMember(@RequestBody AdmissionCommiteeMember member)
 	{
-		AdmissionCommiteeMember savedMember= AddmissionServ.addCommiteeMember(member);
+		AdmissionCommiteeMember savedMember= AdmissionServ.addCommiteeMember(member);
 		return new ResponseEntity<AdmissionCommiteeMember>(savedMember, HttpStatus.OK);
 	}
 	
 	@PutMapping("/update")
 	public ResponseEntity<AdmissionCommiteeMember> updateCommiteeMember(@RequestBody AdmissionCommiteeMember member)
 	{
-		AdmissionCommiteeMember updatedMember= AddmissionServ.updateCommiteeMember(member);
+		AdmissionCommiteeMember updatedMember= AdmissionServ.updateCommiteeMember(member);
 		return new ResponseEntity<AdmissionCommiteeMember>(updatedMember, HttpStatus.OK);
 	}
 	
 	@GetMapping("/view/{id}")
 	public ResponseEntity<AdmissionCommiteeMember> viewCommiteeMember(@PathVariable int id)
 	{
-		AdmissionCommiteeMember member= AddmissionServ.viewCommiteeMember(id);
+		AdmissionCommiteeMember member= AdmissionServ.viewCommiteeMember(id);
 		return new ResponseEntity<AdmissionCommiteeMember>(member, HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<String> removeCommiteeMember(@PathVariable int id)
 	{
-		AddmissionServ.removeCommiteeMember(id);
+		AdmissionServ.removeCommiteeMember(id);
 		return new ResponseEntity<String>("Commitee member with id="+id+" deleted successfully", HttpStatus.OK);
 	}
 	
 	@GetMapping("/viewAll")
 	public ResponseEntity<List<AdmissionCommiteeMember>> viewAllCommiteeMembers()
 	{
-		List<AdmissionCommiteeMember> allMembers= AddmissionServ.viewAllCommiteeMembers();
+		List<AdmissionCommiteeMember> allMembers= AdmissionServ.viewAllCommiteeMembers();
 		return new ResponseEntity<List<AdmissionCommiteeMember>>(allMembers, HttpStatus.OK);
 	}
 	
