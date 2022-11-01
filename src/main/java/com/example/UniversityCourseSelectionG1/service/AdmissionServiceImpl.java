@@ -24,8 +24,8 @@ public class AdmissionServiceImpl implements AdmissionService {
 	@Override
 	public void addAddmission(Admission admission) throws NotFoundException{
 		// TODO Auto-generated method stub
-		if((!courseRepo.existsById(admission.getCourseId())) || (!applicantRepo.existsById(admission.getApplicantId()))) {
-			throw new NotFoundException();
+		if((!courseRepo.existsById(admission.getCourseId())) || (applicantRepo.existsById(admission.getApplicantId()))) {
+			throw new NotFoundException("Can't save admission details");
 		}
 		else
 		{
