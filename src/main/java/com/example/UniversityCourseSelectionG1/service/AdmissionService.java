@@ -8,13 +8,13 @@ import com.example.UniversityCourseSelectionG1.exception.NotFoundException;
 
 
 public interface AdmissionService {
-	void addAddmission(Admission admission) throws NotFoundException;
+	void addAddmission(Admission admission);
 
 	List<Admission> getAdmissions();
 
 	String delAdmissions();
 
-	String delAdmissionsById(int id)throws NotFoundException ;
+	String delAdmissionsById(int id);
 
 	List<Admission> getAdmissionbyCourse(int cId);
 
