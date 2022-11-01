@@ -31,6 +31,8 @@ public class Admission {
 	@JsonSerialize(using = LocalDateSerializer.class)
 	@JsonFormat(pattern = "dd-MMM-yyyy")
 	private LocalDate admissionDate;
+	
+
 	private AdmissionStatus status;
 	
 	public Admission() {
@@ -86,5 +88,11 @@ public class Admission {
 	public void setAdmissionDate(LocalDate admissionDate) {
 		this.admissionDate = admissionDate;
 	}
+	public AdmissionStatus getStatus() {
+		return status;
+	}
 
+	public void setStatus() {
+		this.status =AdmissionStatus.PENDING;
+	}
 }
