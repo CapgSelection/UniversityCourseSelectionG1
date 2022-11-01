@@ -88,6 +88,7 @@ public class Admission {
 	public void setAdmissionDate(LocalDate admissionDate) {
 		this.admissionDate = admissionDate;
 	}
+	//added
 	public AdmissionStatus getStatus() {
 		return status;
 	}
