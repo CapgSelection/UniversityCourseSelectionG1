@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Applicant")
+@Table(name = "Applicant1")
 public class Applicant {
 	
 	@Id
@@ -30,8 +30,16 @@ public class Applicant {
 	
 	@Column(name= "Password")
 	String password;
+<<<<<<< HEAD
 	Admission admission;
 	AdmissionStatus status;
+=======
+
+
+//	Admission admission;
+//	AdmissionStatus status;
+>>>>>>> branch 'main' of https://github.com/CapgSelection/UniversityCourseSelectionG1
+
 
 	
 	public Applicant() {
@@ -48,14 +56,31 @@ public class Applicant {
 		this.applicantDegree = applicantDegree;
 		this.applicantGraduation = applicantGraduation;
 		this.password = password;
+<<<<<<< HEAD
 		this.admission = admission;
 		this.status = status;
+=======
+//		this.admission = admission;
+//		this.status = status;
+
+>>>>>>> branch 'main' of https://github.com/CapgSelection/UniversityCourseSelectionG1
 	}
 
 
+<<<<<<< HEAD
 	public Admission getAdmission() {
 		return admission;
 	}
+=======
+//	public void setAdmission(Admission admission) {
+//		this.admission = admission;
+//	}
+>>>>>>> branch 'main' of https://github.com/CapgSelection/UniversityCourseSelectionG1
+
+	//public void setAdmission(Admission admission) {
+		//this.admission = admission;
+	//}
+
 
 
 	public void setAdmission(Admission admission) {
@@ -71,6 +96,7 @@ public class Applicant {
 	public void setStatus(AdmissionStatus status) {
 		this.status = status;
 	}
+
 
 
 	public int getApplicantId() {
