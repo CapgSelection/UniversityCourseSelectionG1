@@ -32,4 +32,15 @@ public class AdmissionCommiteeMember {
 	
 	@Column(name="admin_password")
 	private String adminPassword;
+
+	public AdmissionCommiteeMember(int adminId, String adminName, String adminContact, String adminUsername,
+			String adminPassword) {
+		super();
+		this.adminId = adminId;
+		this.adminName = adminName;
+		this.adminContact = adminContact;
+		this.adminUsername = adminUsername;
+		this.adminPassword = adminPassword;
+	}
+	
 }

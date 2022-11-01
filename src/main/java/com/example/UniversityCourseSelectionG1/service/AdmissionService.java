@@ -19,4 +19,10 @@ public interface AdmissionService {
 	List<Admission> getAdmissionbyCourse(int cId);
 
 	List<Admission> showAllAdmissionbyDate(LocalDate localdate);
+
+	
+
+	
+
+	
 }
