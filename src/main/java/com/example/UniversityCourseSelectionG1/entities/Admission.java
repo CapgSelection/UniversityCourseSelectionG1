@@ -35,8 +35,8 @@ public class Admission {
 	@JsonFormat(pattern = "dd-MMM-yyyy")
 	private LocalDate admissionDate;
 	
-	@OneToOne(mappedBy = "admission")
-	private Applicant applicant;
+//	@OneToOne(mappedBy = "admission")
+//	private Applicant applicant;
 	private AdmissionStatus status;
 	
 	public Admission() {
