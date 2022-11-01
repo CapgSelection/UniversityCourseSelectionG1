@@ -72,6 +72,8 @@ public class AdmissionServiceImpl implements AdmissionService {
 	public List<Admission> showAllAdmissionbyDate(LocalDate localdate) {
 		// TODO Auto-generated method stub
 		List<Admission> admissionlist = admissionRepo.findAllAdmissionByAdmissionDate(localdate);	
+		if(admissionlist.isEmpty())
+			throw new NotFoundException("No student admitted on this date");
 		return admissionlist;
 	}
 
