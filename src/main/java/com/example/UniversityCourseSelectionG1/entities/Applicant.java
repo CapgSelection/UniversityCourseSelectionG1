@@ -30,8 +30,8 @@ public class Applicant {
 	
 	@Column(name= "Password")
 	String password;
-	Admission admission;
-	AdmissionStatus status;
+//	Admission admission;
+//	AdmissionStatus status;
 
 	
 	public Applicant() {
@@ -48,29 +48,29 @@ public class Applicant {
 		this.applicantDegree = applicantDegree;
 		this.applicantGraduation = applicantGraduation;
 		this.password = password;
-		this.admission = admission;
-		this.status = status;
+//		this.admission = admission;
+//		this.status = status;
 	}
 
 
-	public Admission getAdmission() {
-		return admission;
-	}
+//	public Admission getAdmission() {
+//		return admission;
+//	}
+//
+//
+//	public void setAdmission(Admission admission) {
+//		this.admission = admission;
+//	}
 
 
-	public void setAdmission(Admission admission) {
-		this.admission = admission;
-	}
-
-
-	public AdmissionStatus getStatus() {
-		return status;
-	}
-
-
-	public void setStatus(AdmissionStatus status) {
-		this.status = status;
-	}
+//	public AdmissionStatus getStatus() {
+//		return status;
+//	}
+//
+//
+//	public void setStatus(AdmissionStatus status) {
+//		this.status = status;
+//	}
 
 
 	public int getApplicantId() {
