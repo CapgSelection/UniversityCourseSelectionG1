@@ -1,10 +1,13 @@
 package com.example.UniversityCourseSelectionG1.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -30,16 +33,11 @@ public class Applicant {
 	
 	@Column(name= "Password")
 	String password;
-<<<<<<< HEAD
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "admission_id", referencedColumnName = "admission_id")
 	Admission admission;
 	AdmissionStatus status;
-=======
-
-
-//	Admission admission;
-//	AdmissionStatus status;
->>>>>>> branch 'main' of https://github.com/CapgSelection/UniversityCourseSelectionG1
-
 
 	
 	public Applicant() {
@@ -56,32 +54,15 @@ public class Applicant {
 		this.applicantDegree = applicantDegree;
 		this.applicantGraduation = applicantGraduation;
 		this.password = password;
-<<<<<<< HEAD
 		this.admission = admission;
 		this.status = status;
-=======
-//		this.admission = admission;
-//		this.status = status;
 
->>>>>>> branch 'main' of https://github.com/CapgSelection/UniversityCourseSelectionG1
 	}
 
 
-<<<<<<< HEAD
 	public Admission getAdmission() {
 		return admission;
 	}
-=======
-//	public void setAdmission(Admission admission) {
-//		this.admission = admission;
-//	}
->>>>>>> branch 'main' of https://github.com/CapgSelection/UniversityCourseSelectionG1
-
-	//public void setAdmission(Admission admission) {
-		//this.admission = admission;
-	//}
-
-
 
 	public void setAdmission(Admission admission) {
 		this.admission = admission;

@@ -1,5 +1,7 @@
 package com.example.UniversityCourseSelectionG1.service;
 
+import java.util.List;
+
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,15 +41,8 @@ public class ApplicantServiceImpl implements ApplicantService {
 		Applicant temp=aplRepository.save(applicant);
 		temp.getAdmission().setApplicantId(temp.getApplicantId());
 		return aplRepository.save(temp);
-		
-
 	}
 
-//	@Override
-//	public Optional<Applicant> getById(int applicantId) {
-//		
-//		return aplRepository.findById(applicantId);
-//	}
 
 	@Override
 	public Applicant updateApplicant(Applicant app) {
@@ -76,7 +71,21 @@ public class ApplicantServiceImpl implements ApplicantService {
 			throw new NotFoundException("Applicant does'nt exist!");
 		
 			aplRepository.delete(app);
+	}
+	
 
+	@Override
+	public Optional<Applicant> getById(int id) {
+		
+		if(!aplRepository.existsById(id))
+			throw new NotFoundException("Applicant does'nt exist!");
+	   Optional<Applicant> res= aplRepository.findById(id);
+	   return res;
+	}
+
+	@Override
+	public List<Applicant> viewAllApplicantsByStatus(int status) {
+		return aplRepository.viewAllApplicantByStatus(status);
 	}
 
 }
