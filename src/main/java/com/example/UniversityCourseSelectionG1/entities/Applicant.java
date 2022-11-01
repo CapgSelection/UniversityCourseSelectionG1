@@ -11,7 +11,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Applicant1")
+@Table(name = "Applicant")
 public class Applicant {
 	
 	@Id
@@ -35,7 +35,7 @@ public class Applicant {
 	String password;
 
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "admission_id", referencedColumnName = "admission_id")
+	@JoinColumn(name = "ID", referencedColumnName = "ID")
 	Admission admission;
 	AdmissionStatus status;
 
