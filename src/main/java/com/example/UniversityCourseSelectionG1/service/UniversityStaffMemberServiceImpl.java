@@ -10,14 +10,14 @@ import com.example.UniversityCourseSelectionG1.entities.UniversityStaffMember;
 import com.example.UniversityCourseSelectionG1.exception.NotFoundException;
 import com.example.UniversityCourseSelectionG1.repository.UniversityStaffMemberRepository;
 
- @Service
+@Service
 public class UniversityStaffMemberServiceImpl implements UniversityStaffMemberService {
-	
-	 @Autowired
+
+	@Autowired
 	private UniversityStaffMemberRepository staffRepo;
 	@Autowired
 	private CourseService courseService;
-	
+
 	@Override
 	public UniversityStaffMember addStaff(UniversityStaffMember usm) {
 		return staffRepo.save(usm);
@@ -25,44 +25,50 @@ public class UniversityStaffMemberServiceImpl implements UniversityStaffMemberSe
 
 	@Override
 	public UniversityStaffMember updateStaff(UniversityStaffMember usm) {
-		if(staffRepo.existsById(usm.getStaffId())) {
-			return staffRepo.save(usm);
-		}
+		if (staffRepo.existsById(usm.getStaffId())) {
+			UniversityStaffMember updatedUSM = staffRepo.save(usm);
+			updatedUSM.setPassword("******");
+			return updatedUSM;
+		} 
 		else {
-			throw new NotFoundException("Staff with id: "+usm.getStaffId()+" not found!");
+			throw new NotFoundException("Staff with id: " + usm.getStaffId() + " not found!");
 		}
 	}
 
 	@Override
 	public UniversityStaffMember viewStaff(int id) {
-		if(staffRepo.existsById(id)) {
-			return staffRepo.getReferenceById(id);
-		}
+		if (staffRepo.existsById(id)) {
+			UniversityStaffMember usm = staffRepo.getReferenceById(id);
+			usm.setPassword("******");
+			return usm;
+		} 
 		else {
-			throw new NotFoundException("Staff with id: "+id+" not found!");
+			throw new NotFoundException("Staff with id: " + id + " not found!");
 		}
 	}
 
 	@Override
 	public void removeStaff(int id) {
-		if(staffRepo.existsById(id)) {
-			if(staffRepo.count()==1) {
+		if (staffRepo.existsById(id)) {
+			if (staffRepo.count() == 1) {
 				throw new NotFoundException("Cannot delete last record");
-			}
+			} 
 			else {
 				staffRepo.deleteById(id);
 			}
-		}
+		} 
 		else {
-			throw new NotFoundException("Staff with id: "+id+" not found!");
-		}	
+			throw new NotFoundException("Staff with id: " + id + " not found!");
+		}
 	}
 
 	@Override
 	public List<UniversityStaffMember> viewAllStaffs() {
 		List<UniversityStaffMember> usmList = staffRepo.findAll();
-		if(usmList.isEmpty())
+		if (usmList.isEmpty()) {
 			throw new NotFoundException("No staff records found!");
+		}
+		usmList.forEach(usm -> usm.setPassword("******"));
 		return usmList;
 	}
 
@@ -80,5 +86,5 @@ public class UniversityStaffMemberServiceImpl implements UniversityStaffMemberSe
 	public Course updateCourse(Course course) {
 		return courseService.updateCourse(course);
 	}
-  
+
 }
