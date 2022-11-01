@@ -14,7 +14,9 @@ import lombok.ToString;
 
 @ToString
 @Entity
+
 @Table(name = "Applicant")
+
 public class Applicant {
 	
 	@Id

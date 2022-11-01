@@ -2,6 +2,9 @@ package com.example.UniversityCourseSelectionG1.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +21,7 @@ import com.example.UniversityCourseSelectionG1.entities.Admission;
 import com.example.UniversityCourseSelectionG1.entities.AdmissionCommiteeMember;
 import com.example.UniversityCourseSelectionG1.entities.AdmissionStatus;
 import com.example.UniversityCourseSelectionG1.entities.Applicant;
+import com.example.UniversityCourseSelectionG1.exception.NotLoggedInException;
 import com.example.UniversityCourseSelectionG1.service.AdmissionCommiteeMemberService;
 import com.example.UniversityCourseSelectionG1.service.ApplicantService;
 
@@ -30,9 +34,42 @@ public class AdmissionCommiteeMemberController
 	@Autowired
 	private ApplicantService applicantService; 
 	
+	private boolean checkSession(HttpServletRequest request, String type) {
+		HttpSession session = request.getSession();
+
+		boolean validLogin = true;
+		if (session.isNew()) {
+			validLogin = false;
+		} 
+		else if( session.getAttribute(type) == null)
+		{
+			validLogin = false;
+		}
+		else 
+		{
+			int userId = (int) session.getAttribute(type);
+			if (userId != 0)
+				validLogin = true;
+		}
+		return validLogin;
+	}
+	
+//	@GetMapping("/check")
+//	public ResponseEntity<Object> check(HttpServletRequest request)
+//	{
+//		Object ob=request.getSession().getAttribute("commitee");
+//		
+//		return new ResponseEntity<Object>(ob, HttpStatus.OK);
+//	}
+	
 	@PostMapping("/add")
-	public ResponseEntity<AdmissionCommiteeMember> addCommiteeMember(@RequestBody AdmissionCommiteeMember member)
+	public ResponseEntity<AdmissionCommiteeMember> addCommiteeMember(@RequestBody AdmissionCommiteeMember member, HttpServletRequest request)
 	{
+		if(!checkSession(request, "commitee")) {
+			String port = String.valueOf(request.getServerPort());			
+			throw new NotLoggedInException("Accessible to commitee only. If you are a registered commitee member, click http://localhost:"+port+"/login/commitee to login.");
+		}
+		
 		AdmissionCommiteeMember savedMember= AdmissionServ.addCommiteeMember(member);
 		return new ResponseEntity<AdmissionCommiteeMember>(savedMember, HttpStatus.OK);
 	}
