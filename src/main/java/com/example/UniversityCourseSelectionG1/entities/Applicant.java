@@ -41,6 +41,7 @@ public class Applicant {
 	Admission admission;
 	AdmissionStatus status;
 
+
 	
 	public Applicant() {
 		super();
@@ -56,15 +57,17 @@ public class Applicant {
 		this.applicantDegree = applicantDegree;
 		this.applicantGraduation = applicantGraduation;
 		this.password = password;
+
 		this.admission = admission;
 		this.status = status;
 
 	}
 
-
 	public Admission getAdmission() {
 		return admission;
 	}
+
+
 
 	public void setAdmission(Admission admission) {
 		this.admission = admission;
