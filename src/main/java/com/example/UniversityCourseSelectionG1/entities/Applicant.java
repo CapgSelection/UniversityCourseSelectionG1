@@ -10,6 +10,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import lombok.ToString;
+
+@ToString
 @Entity
 @Table(name = "Applicant")
 public class Applicant {
@@ -34,10 +37,11 @@ public class Applicant {
 	@Column(name= "Password")
 	String password;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(targetEntity = Admission.class,cascade = CascadeType.ALL)
 	@JoinColumn(name = "ID", referencedColumnName = "ID")
 	Admission admission;
 	AdmissionStatus status;
+
 
 	
 	public Applicant() {
@@ -54,15 +58,17 @@ public class Applicant {
 		this.applicantDegree = applicantDegree;
 		this.applicantGraduation = applicantGraduation;
 		this.password = password;
+
 		this.admission = admission;
 		this.status = status;
 
 	}
 
-
 	public Admission getAdmission() {
 		return admission;
 	}
+
+
 
 	public void setAdmission(Admission admission) {
 		this.admission = admission;

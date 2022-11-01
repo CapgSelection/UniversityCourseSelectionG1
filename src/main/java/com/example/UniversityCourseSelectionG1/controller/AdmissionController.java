@@ -29,7 +29,7 @@ public class AdmissionController {
 	private AdmissionService admissionServ;
 	
 	@PostMapping("/addAdmission")
-	public ResponseEntity<String> addAddmission(@RequestBody Admission admission)throws NotFoundException{
+	public ResponseEntity<String> addAddmission(@RequestBody Admission admission){
 		admissionServ.addAddmission(admission);
 		return new ResponseEntity<String>("Added Successfully",HttpStatus.OK);
 		
@@ -45,7 +45,7 @@ public class AdmissionController {
 		return new ResponseEntity<String>(s,HttpStatus.OK);	
 	}
 	@DeleteMapping("delAdmissions/{id}")
-	public ResponseEntity<String> delById(@PathVariable int id)throws NotFoundException {
+	public ResponseEntity<String> delById(@PathVariable int id){
 		String s=admissionServ.delAdmissionsById(id);
 		return new ResponseEntity<String>(s,HttpStatus.OK);	
 	}
