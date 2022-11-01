@@ -1,7 +1,7 @@
 package com.example.UniversityCourseSelectionG1.entities;
 
 import java.time.LocalDate;
-
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -37,14 +37,16 @@ public class Course {
 	
 	@Column(name="course_start_date")
 	@JsonFormat(pattern="dd-MMM-yyyy")
-	@JsonDeserialize(using = LocalDateDeserializer.class)  
-	@JsonSerialize(using = LocalDateSerializer.class)
+//	@JsonDeserialize(using = LocalDateDeserializer.class)  
+//	@JsonSerialize(using = LocalDateSerializer.class)
+//	@JsonFormat(pattern = "dd-MMM-yyyy")
 	private LocalDate courseStartDate;
 	
 	@Column(name="course_end_date")
 	@JsonFormat(pattern="dd-MMM-yyyy")
-	@JsonDeserialize(using = LocalDateDeserializer.class)  
-	@JsonSerialize(using = LocalDateSerializer.class)
+//	@JsonDeserialize(using = LocalDateDeserializer.class)  
+//	@JsonSerialize(using = LocalDateSerializer.class)
+//	@JsonFormat(pattern = "dd-MMM-yyyy")
 	private LocalDate courseEndDate;
 	
 	@Column(name="course_fees")
@@ -59,4 +61,6 @@ public class Course {
 	public Course() {
 		status="ACTIVE";
 	}
+
+	
 }

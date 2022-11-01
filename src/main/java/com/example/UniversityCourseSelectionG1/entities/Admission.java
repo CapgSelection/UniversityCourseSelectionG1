@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -14,7 +15,9 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 
+import lombok.Data;
 
+@Data
 @Entity
 @Table(name="Admission")
 public class Admission {
@@ -31,8 +34,10 @@ public class Admission {
 	@JsonSerialize(using = LocalDateSerializer.class)
 	@JsonFormat(pattern = "dd-MMM-yyyy")
 	private LocalDate admissionDate;
-	
 
+//	not needed
+//	@OneToOne(mappedBy = "admission")
+//	private Applicant applicant;
 	private AdmissionStatus status;
 	
 	public Admission() {
