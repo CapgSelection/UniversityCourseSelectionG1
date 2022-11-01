@@ -25,7 +25,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 
 	@Override
 	public Applicant applyForCourse(Applicant applicant) {
-		
+		System.out.println(applicant);
 		if(applicant.getAdmission()==null || applicant.getAdmission().getCourseId()==0) {
 			throw new NotFoundException("Please Enter admission details!");
 		}
