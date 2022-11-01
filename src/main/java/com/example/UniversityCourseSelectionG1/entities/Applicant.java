@@ -1,14 +1,17 @@
 package com.example.UniversityCourseSelectionG1.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Applicant1")
+@Table(name = "Applicant")
 public class Applicant {
 	
 	@Id
@@ -31,9 +34,10 @@ public class Applicant {
 	@Column(name= "Password")
 	String password;
 
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "ID", referencedColumnName = "ID")
 	Admission admission;
 	AdmissionStatus status;
-
 
 
 	
@@ -56,8 +60,6 @@ public class Applicant {
 		this.status = status;
 
 	}
-
-
 
 	public Admission getAdmission() {
 		return admission;
