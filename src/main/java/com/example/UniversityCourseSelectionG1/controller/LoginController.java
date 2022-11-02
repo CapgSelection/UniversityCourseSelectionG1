@@ -8,10 +8,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.example.UniversityCourseSelectionG1.entities.Authorization;
 import com.example.UniversityCourseSelectionG1.service.LoginService;
 
 @RestController
@@ -21,23 +23,40 @@ public class LoginController {
 	@Autowired
 	private LoginService loginService;
 
-	@GetMapping("/applicant/{userName}/{password}")	
-	public ResponseEntity<String> applicantLogin(@PathVariable int userName, @PathVariable String password,
-			HttpServletRequest request) {
+//	@GetMapping("/applicant/{userName}/{password}")	
+//	public ResponseEntity<String> applicantLogin(@PathVariable int userName, @PathVariable String password,
+//			HttpServletRequest request) {
+//		
+//		Integer loggedUser = (Integer)request.getSession().getAttribute("applicant");
+//		if(loggedUser != null && loggedUser == userName) {
+//			return new ResponseEntity<String>("User already logged in!", HttpStatus.FORBIDDEN);
+//		}
+//		
+//		if (loginService.loginAsApplicant(userName, password))
+//		{
+//			HttpSession session = request.getSession(true);
+//			session.setAttribute("applicant", userName);
+//			return new ResponseEntity<>("Logged in successfully!",HttpStatus.OK);
+//		}
+//		return new ResponseEntity<String>("Invalid Credentials", HttpStatus.FORBIDDEN);
+//
+//	}
+	@PostMapping("/applicant/auth")	
+	public ResponseEntity<String> applicantLogin(@RequestBody Authorization auth , HttpServletRequest request) {
 		
 		Integer loggedUser = (Integer)request.getSession().getAttribute("applicant");
-		if(loggedUser != null && loggedUser == userName) {
+		if(loggedUser != null && loggedUser == auth.getId()) {
 			return new ResponseEntity<String>("User already logged in!", HttpStatus.FORBIDDEN);
 		}
 		
-		if (loginService.loginAsApplicant(userName, password))
+		if (loginService.loginAsApplicant(auth.getId(), auth.getPass()))
 		{
 			HttpSession session = request.getSession(true);
-			session.setAttribute("applicant", userName);
+			session.setAttribute("applicant", auth.getId());
 			return new ResponseEntity<>("Logged in successfully!",HttpStatus.OK);
 		}
 		return new ResponseEntity<String>("Invalid Credentials", HttpStatus.FORBIDDEN);
-
+		
 	}
 	@GetMapping("/staffMember/{userName}/{password}")	
 	public ResponseEntity<String> staffLogin(@PathVariable int userName, @PathVariable String password,
