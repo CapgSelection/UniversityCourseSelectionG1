@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 //import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -29,9 +31,10 @@ public class Applicant {
 	@Column(name= "Applicant Name")
 	String applicantName;
 	
-	@Size(min = 10, message = "Phone number should be of 10 numbers")
-	@Column(name= "Mobile Number", length = 10)
-	long mobileNumber;
+	@Size(min = 10,max=10)
+	@Pattern(regexp="^[0-9]*$", message="Contact can only contain numbers")
+	@Column(name= "Mobile Number")
+	String mobileNumber;
 	
 	@Column(name= "Applicant Degree")
 	String applicantDegree;
@@ -40,12 +43,17 @@ public class Applicant {
 	@Column(name= "Applicant Graduation")
 	double applicantGraduation;
 	
-	@Pattern(regexp = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}", message="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters")
+	@Size(min = 5)
+	@Pattern(regexp="^[A-Za-z0-9@$!%*#?&]*$", message="password not in proper format")
 	@Column(name= "Password")
 	String password;
 
 	@OneToOne
 	Admission admission;
+	@ManyToOne
+    @JoinColumn(name = "admissioncommiteeMember_id")
+    AdmissionCommiteeMember admissionCommiteeMember;
+	
 	AdmissionStatus status;
 
 
@@ -55,8 +63,8 @@ public class Applicant {
 		status = AdmissionStatus.APPLIED;
 	}
 	
-	public Applicant(int applicantId, String applicantName, long mobileNumber, String applicantDegree,
-			double applicantGraduation, String password, Admission admission, AdmissionStatus status) {
+	public Applicant(int applicantId, String applicantName, String mobileNumber, String applicantDegree,
+			double applicantGraduation, String password, Admission admission, AdmissionStatus status,AdmissionCommiteeMember admissionCommiteeMember) {
 		super();
 		this.applicantId = applicantId;
 		this.applicantName = applicantName;
@@ -67,7 +75,16 @@ public class Applicant {
 
 		this.admission = admission;
 		this.status = status;
+		this.admissionCommiteeMember =admissionCommiteeMember;
 
+	}
+
+	public AdmissionCommiteeMember getAdmissionCommiteeMember() {
+		return admissionCommiteeMember;
+	}
+
+	public void setAdmissionCommiteeMember(AdmissionCommiteeMember admissionCommiteeMember) {
+		this.admissionCommiteeMember = admissionCommiteeMember;
 	}
 
 	public Admission getAdmission() {
@@ -112,12 +129,12 @@ public class Applicant {
 	}
 
 
-	public long getMobileNumber() {
+	public String getMobileNumber() {
 		return mobileNumber;
 	}
 
 
-	public void setMobileNumber(long mobileNumber) {
+	public void setMobileNumber(String mobileNumber) {
 		this.mobileNumber = mobileNumber;
 	}
 
