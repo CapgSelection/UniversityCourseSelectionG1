@@ -37,7 +37,6 @@ public class Applicant {
 	String password;
 
 	@OneToOne
-
 	Admission admission;
 	AdmissionStatus status;
 
