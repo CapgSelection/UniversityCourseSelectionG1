@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -28,9 +29,15 @@ public class UniversityStaffMember {
 						sequenceName = "staff_sequence", 
 						allocationSize = 1)
 	private Integer staffId;
+	
 	@Column(name = "staff_name")
+	@NotEmpty(message = "Staff name cannot be empty or null")
 	private String staffName;
+	
+	@NotEmpty(message = "Password cannot be empty or null")
 	private String password;
+	
+	
 	private String role;
 
 }
