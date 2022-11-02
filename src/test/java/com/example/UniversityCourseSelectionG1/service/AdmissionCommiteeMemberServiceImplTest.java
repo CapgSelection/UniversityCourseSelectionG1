@@ -15,6 +15,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.example.UniversityCourseSelectionG1.entities.Admission;
 import com.example.UniversityCourseSelectionG1.entities.AdmissionCommiteeMember;
+import com.example.UniversityCourseSelectionG1.entities.AdmissionStatus;
 //import com.capgemini.UniversityCourseSelection.entities.AdmissionStatus;
 import com.example.UniversityCourseSelectionG1.entities.Applicant;
 import com.example.UniversityCourseSelectionG1.entities.Course;

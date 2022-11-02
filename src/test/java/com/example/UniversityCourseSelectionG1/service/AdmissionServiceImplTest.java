@@ -150,7 +150,7 @@ class AdmissionServiceImplTests {
 	@Test
 	void testShowAllAdmissionByCourseId_failure() {
 		List<Admission> admissionlist = null;
-		Mockito.when(admission_repo.findAllAdmissionByCourseId(add1.getCourseId())).thenReturn(admissionlist);
+		Mockito.when(admission_repo.findByCourseId(add1.getCourseId())).thenReturn(admissionlist);
 		assertEquals(admissionlist,admission_service.showAllAdmissionByCourseId(add1.getCourseId()));
 		
 	}
