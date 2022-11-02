@@ -1,5 +1,6 @@
 package com.example.UniversityCourseSelectionG1.exception;
 
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,6 +28,7 @@ public class GlobalExceptionHandler {
 		ExceptionDescription desc=new ExceptionDescription(e.getMessage());
 		return new ResponseEntity<ExceptionDescription>(desc, HttpStatus.FORBIDDEN);
 	}
+//<<<<<<< HEAD
 
 	@ExceptionHandler(value=DateNotCorrectException.class)
 	public ResponseEntity<ExceptionDescription> handleDateNotCorrectException(DateNotCorrectException e)
@@ -37,8 +39,7 @@ public class GlobalExceptionHandler {
 	}
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(MethodArgumentNotValidException.class)
-	public Map<String, String> handleValidationExceptions(
-	  MethodArgumentNotValidException ex) {
+	public Map<String, String> handleValidationExceptions( MethodArgumentNotValidException ex) {
 	    Map<String, String> errors = new HashMap<>();
 	    ex.getBindingResult().getAllErrors().forEach((error) -> {
 	        String fieldName = ((FieldError) error).getField();
@@ -46,6 +47,10 @@ public class GlobalExceptionHandler {
 	        errors.put(fieldName, errorMessage);
 	    });
 	    return errors;
+	    }
 //>>>>>>> branch 'main' of https://github.com/CapgSelection/UniversityCourseSelectionG1.git
-	}
+	
+//=======
+	
+//>>>>>>> branch 'main' of https://github.com/CapgSelection/UniversityCourseSelectionG1.git
 }

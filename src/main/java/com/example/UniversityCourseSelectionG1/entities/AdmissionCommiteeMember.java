@@ -30,7 +30,7 @@ public class AdmissionCommiteeMember {
 	
 	@Column(name="admin_contact")
 	@Size(min = 10,max=10)
-	@Pattern(regexp="^[0-9]$", message="Contact can only contain numbers")
+//	@Pattern(regexp="^[0-9]$", message="Contact can only contain numbers")
 	private String adminContact;
 	
 	@Column(name="admin_username")
@@ -40,7 +40,7 @@ public class AdmissionCommiteeMember {
 	
 	@Column(name="admin_password")
 	@Size(min = 5)
-	@Pattern(regexp="^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]$", message="password not in proper format")
+//	@Pattern(regexp="^[A-Za-z0-9]$", message="password not in proper format")
 	private String adminPassword;
 
 	public AdmissionCommiteeMember(int adminId, String adminName, String adminContact, String adminUsername,

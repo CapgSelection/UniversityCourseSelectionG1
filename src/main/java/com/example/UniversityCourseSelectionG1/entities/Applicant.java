@@ -11,6 +11,9 @@ import javax.persistence.Id;
 //import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Entity
 
@@ -22,19 +25,22 @@ public class Applicant {
 	@Column(name= "Applicant_ID")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	int applicantId;
-	
+		
 	@Column(name= "Applicant Name")
 	String applicantName;
 	
-	@Column(name= "Mobile Number")
+	@Size(min = 10, message = "Phone number should be of 10 numbers")
+	@Column(name= "Mobile Number", length = 10)
 	long mobileNumber;
 	
 	@Column(name= "Applicant Degree")
 	String applicantDegree;
 	
+	@Max(value = 10)
 	@Column(name= "Applicant Graduation")
 	double applicantGraduation;
 	
+	@Pattern(regexp = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}", message="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters")
 	@Column(name= "Password")
 	String password;
 
