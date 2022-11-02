@@ -19,7 +19,7 @@ import javax.persistence.Table;
 public class Applicant {
 	
 	@Id
-	@Column(name= "Applicant ID")
+	@Column(name= "Applicant_ID")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	int applicantId;
 	
