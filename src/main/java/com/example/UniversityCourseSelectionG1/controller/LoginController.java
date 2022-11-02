@@ -57,7 +57,7 @@ public class LoginController {
 		return new ResponseEntity<String>("Invalid Credentials", HttpStatus.FORBIDDEN);
 		
 	}
-	@GetMapping("/staffMember/auth")	
+	@PostMapping("/staffMember/auth")	
 	public ResponseEntity<String> staffLogin(@RequestBody Authorization auth , HttpServletRequest request) {
 		
 		Integer loggedUser = (Integer)request.getSession().getAttribute("staffMember");
