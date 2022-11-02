@@ -2,6 +2,9 @@ package com.example.UniversityCourseSelectionG1.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.UniversityCourseSelectionG1.exception.NotLoggedInException;
 import com.example.UniversityCourseSelectionG1.entities.Course;
 import com.example.UniversityCourseSelectionG1.entities.UniversityStaffMember;
 import com.example.UniversityCourseSelectionG1.service.CourseService;
@@ -22,59 +26,95 @@ import com.example.UniversityCourseSelectionG1.service.UniversityStaffMemberServ
 @RestController
 @RequestMapping("/uni/staff")
 public class UniversityStaffController {
-	//commit test
+	// commit test
 	@Autowired
 	private UniversityStaffMemberService usmService;
-	
+
 	@Autowired
 	private CourseService courseService;
-	
+
+	public boolean checkSession(HttpServletRequest request, String type) {
+		HttpSession session = request.getSession(true);
+		if(session.isNew() || session.getAttribute(type) == null) {
+			return false;
+		}
+		int userId = (int) session.getAttribute(type);
+		if (userId == 0) {
+			return false;
+		}
+		return true;
+	}
+
 	@PostMapping("/add")
-	public ResponseEntity<UniversityStaffMember> addStaff(@RequestBody UniversityStaffMember usm) {
+	public ResponseEntity<UniversityStaffMember> addStaff(@RequestBody UniversityStaffMember usm, HttpServletRequest request) {
+		if(!checkSession(request, "staffMember")) {
+			String port = String.valueOf(request.getServerPort());			
+			throw new NotLoggedInException("Accessible to staff only. If you are a registered staff member, click http://localhost:"+port+"/login/staffMember to login.");
+		}
 		UniversityStaffMember savedUSM = usmService.addStaff(usm);
 		return new ResponseEntity<>(savedUSM, HttpStatus.CREATED);
 	}
-	
+
 	@PutMapping("/update")
-	public ResponseEntity<UniversityStaffMember> updateStaff(@RequestBody UniversityStaffMember usm) {
+	public ResponseEntity<UniversityStaffMember> updateStaff(@RequestBody UniversityStaffMember usm, HttpServletRequest request) {
+		if(!checkSession(request, "staffMember")) {
+			String port = String.valueOf(request.getServerPort());
+			throw new NotLoggedInException("Accessible to staff only. If you are a registered staff member, click http://localhost:"+port+"/login/staffMember to login.");
+		}
 		UniversityStaffMember updatedUSM = usmService.updateStaff(usm);
 		return new ResponseEntity<>(updatedUSM, HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/view/{id}")
 	public ResponseEntity<UniversityStaffMember> viewStaffById(@PathVariable int id) {
 		UniversityStaffMember fetchedUSM = usmService.viewStaff(id);
 		return new ResponseEntity<>(fetchedUSM, HttpStatus.FOUND);
 	}
-	
+
 	@GetMapping("/view/all")
 	public ResponseEntity<List<UniversityStaffMember>> viewAllStaff() {
 		List<UniversityStaffMember> fetchedUSMList = usmService.viewAllStaffs();
 		return new ResponseEntity<>(fetchedUSMList, HttpStatus.FOUND);
 	}
-	
+
 	@DeleteMapping("/delete/{id}")
-	public ResponseEntity<String> deleteStaffById(@PathVariable int id) {
+	public ResponseEntity<String> deleteStaffById(@PathVariable int id, HttpServletRequest request) {
+		if(!checkSession(request, "staffMember")) {
+			String port = String.valueOf(request.getServerPort());
+			throw new NotLoggedInException("Accessible to staff only. If you are a registered staff member, click http://localhost:"+port+"/login/staffMember to login.");
+		}
 		usmService.removeStaff(id);
-		return new ResponseEntity<String>("Staff with id: "+id+" deleted successfully!", HttpStatus.OK);
+		return new ResponseEntity<String>("Staff with id: " + id + " deleted successfully!", HttpStatus.OK);
 	}
-	
+
 	@PostMapping("/course/add")
-	public ResponseEntity<Course> addCourse(@RequestBody Course course) {
+	public ResponseEntity<Course> addCourse(@RequestBody Course course, HttpServletRequest request) {
+		if(!checkSession(request, "staffMember")) {
+			String port = String.valueOf(request.getServerPort());
+			throw new NotLoggedInException("Accessible to staff only. If you are a registered staff member, click http://localhost:"+port+"/login/staffMember to login.");
+		}
 		Course savedCourse = courseService.addCourse(course);
 		return new ResponseEntity<>(savedCourse, HttpStatus.CREATED);
 	}
-	
+
 	@PutMapping("/course/update")
-	public ResponseEntity<Course> updateCourse(@RequestBody Course course) {
+	public ResponseEntity<Course> updateCourse(@RequestBody Course course, HttpServletRequest request) {
+		if(!checkSession(request, "staffMember")) {
+			String port = String.valueOf(request.getServerPort());
+			throw new NotLoggedInException("Accessible to staff only. If you are a registered staff member, click http://localhost:"+port+"/login/staffMember to login.");
+		}
 		Course updatedourse = courseService.updateCourse(course);
 		return new ResponseEntity<>(updatedourse, HttpStatus.OK);
 	}
-	
+
 	@DeleteMapping("/course/delete/{id}")
-	public ResponseEntity<String> deleteCourseById(@PathVariable int id) {
+	public ResponseEntity<String> deleteCourseById(@PathVariable int id, HttpServletRequest request) {
+		if(!checkSession(request, "staffMember")) {
+			String port = String.valueOf(request.getServerPort());
+			throw new NotLoggedInException("Accessible to staff only. If you are a registered staff member, click http://localhost:"+port+"/login/staffMember to login.");
+		}
 		courseService.removeCourse(id);
-		return new ResponseEntity<>("Course with id: "+id+" deleted successfully!",HttpStatus.OK);
+		return new ResponseEntity<>("Course with id: " + id + " deleted successfully!", HttpStatus.OK);
 	}
-	
+
 }

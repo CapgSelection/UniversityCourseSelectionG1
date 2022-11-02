@@ -20,6 +20,8 @@ public interface AdmissionService {
 
 	List<Admission> showAllAdmissionbyDate(LocalDate localdate);
 
+	Admission updateAdmission(Admission admission);
+
 	
 
 	
