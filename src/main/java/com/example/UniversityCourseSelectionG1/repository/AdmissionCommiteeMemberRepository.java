@@ -14,13 +14,13 @@ public interface AdmissionCommiteeMemberRepository extends JpaRepository<Admissi
 	@Query("SELECT c FROM Course c where c.courseId = ?1")
 	Course getCourseById(int id);
 	
-	@Query(value="Select * from admission_committee_member where admin_id=?1 and admin_password=?2", nativeQuery=true)
+	@Query(value="select * from admission_commitee_member where admin_id=?1 and admin_password=?2", nativeQuery=true)
 	AdmissionCommiteeMember verifyAdmissionCommiteeMember(int id, String password);
 	
 	
 	@Transactional
 	@Modifying
-	@Query(value="ALTER SEQUENCE admission_committee_member_admin_id_seq RESTART WITH 1", nativeQuery = true)
+	@Query(value="ALTER SEQUENCE admission_commitee_member_admin_id_seq RESTART WITH 1", nativeQuery = true)
 	void resetCommitteeIdSequence();
 
 	
