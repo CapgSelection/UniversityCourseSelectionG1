@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import com.example.UniversityCourseSelectionG1.entities.Admission;
 import com.example.UniversityCourseSelectionG1.exception.NotFoundException;
 import com.example.UniversityCourseSelectionG1.repository.AdmissionRepository;
@@ -76,6 +77,22 @@ public class AdmissionServiceImpl implements AdmissionService {
 			throw new NotFoundException("No student admitted on this date");
 		return admissionlist;
 	}
+
+	@Override
+	public Admission updateAdmission(Admission admission) {
+		// TODO Auto-generated method stub
+		if((!courseRepo.existsById(admission.getCourseId())) || (applicantRepo.existsById(admission.getApplicantId()))) {
+			throw new NotFoundException("Can't update admission details");
+		}
+		else
+		{
+			admissionRepo.save(admission);
+			return admission;
+		}
+	
+	}
+
+	
 
 	
 	
