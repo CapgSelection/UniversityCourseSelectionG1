@@ -1,12 +1,14 @@
 package com.example.UniversityCourseSelectionG1.entities;
 
-import javax.persistence.CascadeType;
+import java.util.Objects;
+
+//import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+//import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -142,6 +144,29 @@ public class Applicant {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(admission, applicantDegree, applicantGraduation, applicantId, applicantName, mobileNumber,
+				password, status);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Applicant other = (Applicant) obj;
+		return Objects.equals(admission, other.admission) && Objects.equals(applicantDegree, other.applicantDegree)
+				&& Double.doubleToLongBits(applicantGraduation) == Double.doubleToLongBits(other.applicantGraduation)
+				&& applicantId == other.applicantId && Objects.equals(applicantName, other.applicantName)
+				&& mobileNumber == other.mobileNumber && Objects.equals(password, other.password)
+				&& status == other.status;
+	}
+	
 	
 }
 

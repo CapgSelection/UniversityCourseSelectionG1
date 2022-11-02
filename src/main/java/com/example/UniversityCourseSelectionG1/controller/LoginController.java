@@ -62,6 +62,7 @@ public class LoginController {
 			HttpServletRequest request) {
 		
 		Integer loggedUser = (Integer)request.getSession().getAttribute("commitee");
+		System.out.println(loggedUser);
 		if(loggedUser != null && loggedUser == userName) {
 			return new ResponseEntity<String>("User already logged in!", HttpStatus.FORBIDDEN);
 		}
