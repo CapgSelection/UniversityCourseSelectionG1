@@ -62,7 +62,7 @@ public class Applicant {
 		status = AdmissionStatus.APPLIED;
 	}
 	
-	public Applicant(int applicantId, String applicantName, long mobileNumber, String applicantDegree,
+	public Applicant(int applicantId, String applicantName, String mobileNumber, String applicantDegree,
 			double applicantGraduation, String password, Admission admission, AdmissionStatus status,AdmissionCommiteeMember admissionCommiteeMember) {
 		super();
 		this.applicantId = applicantId;
@@ -128,12 +128,12 @@ public class Applicant {
 	}
 
 
-	public long getMobileNumber() {
+	public String getMobileNumber() {
 		return mobileNumber;
 	}
 
 
-	public void setMobileNumber(long mobileNumber) {
+	public void setMobileNumber(String mobileNumber) {
 		this.mobileNumber = mobileNumber;
 	}
 
