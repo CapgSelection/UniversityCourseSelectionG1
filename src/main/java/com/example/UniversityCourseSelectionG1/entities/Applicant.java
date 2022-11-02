@@ -32,8 +32,8 @@ public class Applicant {
 	String applicantName;
 	
 	@Size(min = 10, message = "Phone number should be of 10 numbers")
-	@Column(name= "Mobile Number", length = 10)
-	long mobileNumber;
+	@Column(name= "Mobile Number")
+	String mobileNumber;
 	
 	@Column(name= "Applicant Degree")
 	String applicantDegree;
@@ -63,7 +63,7 @@ public class Applicant {
 	}
 	
 	public Applicant(int applicantId, String applicantName, long mobileNumber, String applicantDegree,
-			double applicantGraduation, String password, Admission admission, AdmissionStatus status) {
+			double applicantGraduation, String password, Admission admission, AdmissionStatus status,AdmissionCommiteeMember admissionCommiteeMember) {
 		super();
 		this.applicantId = applicantId;
 		this.applicantName = applicantName;
@@ -74,7 +74,16 @@ public class Applicant {
 
 		this.admission = admission;
 		this.status = status;
+		this.admissionCommiteeMember =admissionCommiteeMember;
 
+	}
+
+	public AdmissionCommiteeMember getAdmissionCommiteeMember() {
+		return admissionCommiteeMember;
+	}
+
+	public void setAdmissionCommiteeMember(AdmissionCommiteeMember admissionCommiteeMember) {
+		this.admissionCommiteeMember = admissionCommiteeMember;
 	}
 
 	public Admission getAdmission() {
