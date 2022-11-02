@@ -74,7 +74,7 @@ public class LoginController {
 		return new ResponseEntity<String>("Invalid Credentials", HttpStatus.FORBIDDEN);
 		
 	}
-	@GetMapping("/commitee/auth")	
+	@PostMapping("/commitee/auth")	
 	public ResponseEntity<String> commiteeLogin(@RequestBody Authorization auth , HttpServletRequest request) {
 		
 		Integer loggedUser = (Integer)request.getSession().getAttribute("commitee");
