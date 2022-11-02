@@ -31,7 +31,8 @@ public class Applicant {
 	@Column(name= "Applicant Name")
 	String applicantName;
 	
-	@Size(min = 10, message = "Phone number should be of 10 numbers")
+	@Size(min = 10,max=10)
+	@Pattern(regexp="^[0-9]*$", message="Contact can only contain numbers")
 	@Column(name= "Mobile Number")
 	String mobileNumber;
 	
@@ -42,7 +43,8 @@ public class Applicant {
 	@Column(name= "Applicant Graduation")
 	double applicantGraduation;
 	
-	@Pattern(regexp = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}", message="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters")
+	@Size(min = 5)
+	@Pattern(regexp="^[A-Za-z0-9@$!%*#?&]*$", message="password not in proper format")
 	@Column(name= "Password")
 	String password;
 
