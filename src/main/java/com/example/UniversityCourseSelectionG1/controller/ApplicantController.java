@@ -3,10 +3,12 @@ package com.example.UniversityCourseSelectionG1.controller;
 import java.util.List;
 
 
+
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,6 +26,7 @@ import com.example.UniversityCourseSelectionG1.entities.Applicant;
 import com.example.UniversityCourseSelectionG1.exception.NotFoundException;
 import com.example.UniversityCourseSelectionG1.exception.NotLoggedInException;
 import com.example.UniversityCourseSelectionG1.service.ApplicantService;
+
 
 @RestController
 @RequestMapping("/applicant")
@@ -48,7 +51,7 @@ public class ApplicantController {
 	}
 	
 	@PostMapping("/apply")
-	public ResponseEntity<Applicant> applyForCourse(@RequestBody Applicant applicant)
+	public ResponseEntity<Applicant> applyForCourse(@Valid @RequestBody Applicant applicant)
 	{
 		Applicant applyApl= aplService.applyForCourse(applicant);
 		return new ResponseEntity<Applicant>(applyApl,HttpStatus.ACCEPTED);
@@ -86,7 +89,7 @@ public class ApplicantController {
 	}
 	
 	@PutMapping("/update")
-	public ResponseEntity<Applicant> updateApplicant(@RequestBody Applicant applicant,HttpServletRequest request)
+	public ResponseEntity<Applicant> updateApplicant(@Valid @RequestBody Applicant applicant,HttpServletRequest request)
 	{
 		boolean valid=checkSession(request,"applicant");
 		String host = String.valueOf(request.getServerPort());
@@ -108,7 +111,7 @@ public class ApplicantController {
 	}
 	
 	@DeleteMapping("/delete")
-	public ResponseEntity<String> deleteApplicant(@RequestBody Applicant applicant,HttpServletRequest request) {
+	public ResponseEntity<String> deleteApplicant(@Valid @RequestBody Applicant applicant,HttpServletRequest request) {
 		
 		boolean valid = checkSession(request, "applicant");
 		String host = String.valueOf(request.getServerPort());

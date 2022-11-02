@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -64,7 +65,7 @@ public class AdmissionCommiteeMemberController
 //	}
 	
 	@PostMapping("/add")
-	public ResponseEntity<AdmissionCommiteeMember> addCommiteeMember(@RequestBody AdmissionCommiteeMember member, HttpServletRequest request)
+	public ResponseEntity<AdmissionCommiteeMember> addCommiteeMember(@Valid @RequestBody AdmissionCommiteeMember member, HttpServletRequest request)
 	{
 		if(!checkSession(request, "commitee")) {
 			String port = String.valueOf(request.getServerPort());			
@@ -76,7 +77,7 @@ public class AdmissionCommiteeMemberController
 	}
 	
 	@PutMapping("/update")
-	public ResponseEntity<AdmissionCommiteeMember> updateCommiteeMember(@RequestBody AdmissionCommiteeMember member, HttpServletRequest request)
+	public ResponseEntity<AdmissionCommiteeMember> updateCommiteeMember(@Valid @RequestBody AdmissionCommiteeMember member, HttpServletRequest request)
 	{
 		if(!checkSession(request, "commitee")) {
 			String port = String.valueOf(request.getServerPort());			
