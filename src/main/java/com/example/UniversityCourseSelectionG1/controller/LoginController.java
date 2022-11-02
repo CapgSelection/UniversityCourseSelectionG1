@@ -78,19 +78,26 @@ public class LoginController {
 	public ResponseEntity<String> commiteeLogin(@RequestBody Authorization auth , HttpServletRequest request) {
 		
 		Integer loggedUser = (Integer)request.getSession().getAttribute("commitee");
-		System.out.println(loggedUser);
+//<<<<<<< HEAD
+//		if(loggedUser != null && loggedUser == userName) {
+//=======
+//		System.out.println(loggedUser);
 		if(loggedUser != null && loggedUser == auth.getId()) {
+//>>>>>>> branch 'main' of https://github.com/CapgSelection/UniversityCourseSelectionG1.git
 			return new ResponseEntity<String>("User already logged in!", HttpStatus.FORBIDDEN);
 		}
+//<<<<<<< HEAD
+//=======
 	
 		if (loginService.loginAsAdmissionCommiteeMember(auth.getId(), auth.getPass()))
+//>>>>>>> branch 'main' of https://github.com/CapgSelection/UniversityCourseSelectionG1.git
 		
+//		if (loginService.loginAsAdmissionCommiteeMember(userName, password))
 		{
 			HttpSession session = request.getSession(true);
 			session.setAttribute("commitee", auth.getId());
 			return new ResponseEntity<>("Logged in successfully!",HttpStatus.OK);
 		}
-		
 		return new ResponseEntity<String>("Invalid Credentials", HttpStatus.FORBIDDEN);
 		
 	}

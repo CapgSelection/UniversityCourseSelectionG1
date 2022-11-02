@@ -47,7 +47,6 @@ public class Applicant {
 	String password;
 
 	@OneToOne
-
 	Admission admission;
 	@ManyToOne
     @JoinColumn(name = "admissioncommiteeMember_id")

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.UniversityCourseSelectionG1.exception.DateNotCorrectException;
 import com.example.UniversityCourseSelectionG1.exception.NotFoundException;
 import com.example.UniversityCourseSelectionG1.entities.Course;
 import com.example.UniversityCourseSelectionG1.repository.CourseRepository;
@@ -17,7 +18,11 @@ public class CoursServiceImpl implements CourseService {
 	@Override
 	public Course addCourse(Course course) {
 		// TODO Auto-generated method stub
+		if(course.getCourseEndDate().compareTo(course.getCourseStartDate())<0) {
+			throw new DateNotCorrectException("Enter the Correct Course Date with Course id: "+course.getCourseId());
+		}else {
 		return courseRepo.save(course);
+	}
 	}
 
 	@Override
