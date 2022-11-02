@@ -22,7 +22,7 @@ public class CoursServiceImpl implements CourseService {
 
 	@Override
 	public Course removeCourse(int courseId) {
-		// TODO Auto-generated method stub
+		
 		Course deletedCourse = null;
 		if(courseRepo.existsById(courseId)) {
 			deletedCourse = courseRepo.findById(courseId).get();
