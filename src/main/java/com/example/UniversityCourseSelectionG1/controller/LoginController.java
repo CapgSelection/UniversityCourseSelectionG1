@@ -57,39 +57,37 @@ public class LoginController {
 		return new ResponseEntity<String>("Invalid Credentials", HttpStatus.FORBIDDEN);
 		
 	}
-	@GetMapping("/staffMember/{userName}/{password}")	
-	public ResponseEntity<String> staffLogin(@PathVariable int userName, @PathVariable String password,
-			HttpServletRequest request) {
+	@GetMapping("/staffMember/auth")	
+	public ResponseEntity<String> staffLogin(@RequestBody Authorization auth , HttpServletRequest request) {
 		
 		Integer loggedUser = (Integer)request.getSession().getAttribute("staffMember");
-		if(loggedUser != null && loggedUser == userName) {
+		if(loggedUser != null && loggedUser == auth.getId()) {
 			return new ResponseEntity<String>("User already logged in!", HttpStatus.FORBIDDEN);
 		}
 		
-		if (loginService.loginAsUniversityStaffMember(userName, password))
+		if (loginService.loginAsUniversityStaffMember(auth.getId(), auth.getPass()))
 		{
 			HttpSession session = request.getSession(true);
-			session.setAttribute("staffMember", userName);
+			session.setAttribute("staffMember", auth.getId());
 			return new ResponseEntity<>("Logged in successfully!",HttpStatus.OK);
 		}
 		return new ResponseEntity<String>("Invalid Credentials", HttpStatus.FORBIDDEN);
 		
 	}
-	@GetMapping("/commitee/{userName}/{password}")	
-	public ResponseEntity<String> commiteeLogin(@PathVariable int userName, @PathVariable String password,
-			HttpServletRequest request) {
+	@GetMapping("/commitee/auth")	
+	public ResponseEntity<String> commiteeLogin(@RequestBody Authorization auth , HttpServletRequest request) {
 		
 		Integer loggedUser = (Integer)request.getSession().getAttribute("commitee");
 		System.out.println(loggedUser);
-		if(loggedUser != null && loggedUser == userName) {
+		if(loggedUser != null && loggedUser == auth.getId()) {
 			return new ResponseEntity<String>("User already logged in!", HttpStatus.FORBIDDEN);
 		}
 	
-		if (loginService.loginAsAdmissionCommiteeMember(userName, password))
+		if (loginService.loginAsAdmissionCommiteeMember(auth.getId(), auth.getPass()))
 		
 		{
 			HttpSession session = request.getSession(true);
-			session.setAttribute("commitee", userName);
+			session.setAttribute("commitee", auth.getId());
 			return new ResponseEntity<>("Logged in successfully!",HttpStatus.OK);
 		}
 		
