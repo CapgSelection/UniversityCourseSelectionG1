@@ -37,7 +37,7 @@ public class UniversityStaffMember {
 	@NotEmpty(message = "Password cannot be empty or null")
 	private String password;
 	
-	
+	@NotEmpty(message = "Role cannot be empty or null")
 	private String role;
 
 }
