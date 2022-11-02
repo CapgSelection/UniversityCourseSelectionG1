@@ -62,19 +62,16 @@ public class LoginController {
 			HttpServletRequest request) {
 		
 		Integer loggedUser = (Integer)request.getSession().getAttribute("commitee");
-		System.out.println(loggedUser);
 		if(loggedUser != null && loggedUser == userName) {
 			return new ResponseEntity<String>("User already logged in!", HttpStatus.FORBIDDEN);
 		}
-	
-		if (loginService.loginAsAdmissionCommiteeMember(userName, password))
 		
+		if (loginService.loginAsAdmissionCommiteeMember(userName, password))
 		{
 			HttpSession session = request.getSession(true);
 			session.setAttribute("commitee", userName);
 			return new ResponseEntity<>("Logged in successfully!",HttpStatus.OK);
 		}
-		
 		return new ResponseEntity<String>("Invalid Credentials", HttpStatus.FORBIDDEN);
 		
 	}
