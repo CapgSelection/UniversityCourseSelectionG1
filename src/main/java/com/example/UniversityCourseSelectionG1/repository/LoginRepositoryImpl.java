@@ -36,7 +36,7 @@ public class LoginRepositoryImpl implements LoginRepository{
 			uniRepo.save(usm);
 		}
 		if(type.equalsIgnoreCase("commitee")) {
-			AdmissionCommiteeMember acm = new AdmissionCommiteeMember(1,"adminName","989789687","username","password");					
+			AdmissionCommiteeMember acm = new AdmissionCommiteeMember(0,"adminName","1234567890","username","password");					
 			addRepo.resetCommitteeIdSequence();
 			addRepo.save(acm);
 		}
