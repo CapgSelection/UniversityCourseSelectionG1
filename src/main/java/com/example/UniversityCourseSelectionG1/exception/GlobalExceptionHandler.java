@@ -21,4 +21,10 @@ public class GlobalExceptionHandler {
 		ExceptionDescription desc=new ExceptionDescription(e.getMessage());
 		return new ResponseEntity<ExceptionDescription>(desc, HttpStatus.FORBIDDEN);
 	}
+	@ExceptionHandler(value=DateNotCorrectException.class)
+	public ResponseEntity<ExceptionDescription> handleDateNotCorrectException(DateNotCorrectException e)
+	{
+		ExceptionDescription desc=new ExceptionDescription(e.getMessage());
+		return new ResponseEntity<ExceptionDescription>(desc, HttpStatus.FORBIDDEN);
+	}
 }
