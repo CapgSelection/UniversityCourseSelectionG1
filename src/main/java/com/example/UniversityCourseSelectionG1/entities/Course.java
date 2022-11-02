@@ -62,5 +62,16 @@ public class Course {
 		status="ACTIVE";
 	}
 
+	public Course(int i, String string, String string2, LocalDate of, LocalDate of2, String string3, double d) {
+		this.courseId=i;
+		this.courseName=string;
+		this.courseDuration=string2;
+		this.courseStartDate=of;
+		this.courseEndDate=of2;
+		this.courseFees=string3;
+		this.courseCriteria=d;
+		// TODO Auto-generated constructor stub
+	}
+
 	
 }
