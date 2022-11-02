@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name="admission_commitee_member")
+@Table(name="admission_commitee_member", schema = "public")
 public class AdmissionCommiteeMember {
 
 	@Id
