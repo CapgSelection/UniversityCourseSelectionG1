@@ -83,8 +83,20 @@ public class Applicant {
 		this.admission = admission;
 		this.status = status;
 		this.admissionCommiteeMember =admissionCommiteeMember;
-
 	}
+		public Applicant(int applicantId, String applicantName, String mobileNumber, String applicantDegree,
+				double applicantGraduation, String password, Admission admission) {
+			super();
+			this.applicantId = applicantId;
+			this.applicantName = applicantName;
+			this.mobileNumber = mobileNumber;
+			this.applicantDegree = applicantDegree;
+			this.applicantGraduation = applicantGraduation;
+			this.password = password;
+
+			this.admission = admission;
+		}
+	
 
 	public AdmissionCommiteeMember getAdmissionCommiteeMember() {
 		return admissionCommiteeMember;
