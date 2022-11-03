@@ -3,6 +3,7 @@ package com.example.UniversityCourseSelectionG1.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +13,7 @@ import com.example.UniversityCourseSelectionG1.entities.Course;
 import com.example.UniversityCourseSelectionG1.entities.UniversityStaffMember;
 import com.example.UniversityCourseSelectionG1.exception.NotFoundException;
 import com.example.UniversityCourseSelectionG1.repository.UniversityStaffMemberRepository;
-import com.example.UniversityCourseSelectionG1.repository.UniversityStaffMemberRepository;
+//import com.example.UniversityCourseSelectionG1.repository.UniversityStaffMemberRepository;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
