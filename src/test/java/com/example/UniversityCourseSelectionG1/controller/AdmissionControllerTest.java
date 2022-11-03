@@ -12,12 +12,14 @@ import java.time.format.DateTimeFormatterBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpSession;
@@ -36,12 +38,11 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 class AdmissionControllerTest {
 	
     private MockMvc mockMvc;
-	
 	ObjectMapper objectMapper = new ObjectMapper();
 	ObjectWriter objectWriter = objectMapper.writer();
 	
 	@Mock
-	private AdmissionServiceImpl admission_service;
+	private AdmissionServiceImpl admission_service=Mockito.mock(AdmissionServiceImpl.class);
 	
 	@InjectMocks
 	private AdmissionController admission_ctrl;
@@ -70,7 +71,7 @@ class AdmissionControllerTest {
 		Mockito.when(admission_service.addAdmission(add1)).thenReturn(add1);
 		String body = objectWriter.writeValueAsString(add1);
 		
-		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.post("/admission/add").session(session)
+		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.post("/addAdmission").session(session)
 				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).content(body);
 		mockMvc.perform(mockRequest).andExpect(status().isOk());	
 	}
@@ -86,10 +87,10 @@ class AdmissionControllerTest {
 		MockHttpSession session = new MockHttpSession();
 		session.setAttribute("commitee", 6);
 				
-		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.put("/admission/update").session(session)
+		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.put("/update").session(session)
 				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).content(body);
 		
-		mockMvc.perform(mockRequest).andExpect(status().isOk());		
+		mockMvc.perform(mockRequest).andExpect(status().isOk()).andReturn();		
 	}
 	
 
@@ -99,11 +100,11 @@ class AdmissionControllerTest {
 		MockHttpSession session = new MockHttpSession();
 		session.setAttribute("commitee", 2);
 		
-		Mockito.when(admission_service.delAdmissionsById(add1.getAdmissionId())).thenReturn("Deleted Successfully");
+		Mockito.lenient().when(admission_service.delAdmissionsById(add1.getAdmissionId())).thenReturn("Deleted Successfully");
 				
 		String getBody = objectWriter.writeValueAsString(add1);
 
-		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.delete("/admission/cancel/1").session(session)
+		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.delete("/delAdmissions/1").session(session)
 				.contentType(MediaType.APPLICATION_JSON).content(getBody).accept(MediaType.APPLICATION_JSON);
 
 		mockMvc.perform(mockRequest).andExpect(status().isOk());		
@@ -124,7 +125,7 @@ class AdmissionControllerTest {
 
 		String getBody = objectWriter.writeValueAsString(admissionlist);
 
-		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.get("/admission/allbyId/5").session(session)
+		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.get("/admissions/1").session(session)
 				.contentType(MediaType.APPLICATION_JSON).content(getBody).accept(MediaType.APPLICATION_JSON);
 
 		mockMvc.perform(mockRequest).andExpect(status().isOk());
@@ -144,7 +145,7 @@ class AdmissionControllerTest {
 		
 		String getBody = objectWriter.writeValueAsString(admissionlist);
 
-		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.get("/admission/allbyDate/10/Sep/2020").session(session)
+		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.get("/allbyDate/10/Sep/2020").session(session)
 				.contentType(MediaType.APPLICATION_JSON).content(getBody).accept(MediaType.APPLICATION_JSON);
 
 		mockMvc.perform(mockRequest).andExpect(status().isOk());	
@@ -157,7 +158,7 @@ class AdmissionControllerTest {
 		
 		String body = objectWriter.writeValueAsString(add1);
 		
-		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.post("/admission/add")
+		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.post("/addAdmission")
 				.session(session)
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON)
@@ -174,7 +175,7 @@ class AdmissionControllerTest {
 		
 		String body = objectWriter.writeValueAsString(add1);
 		
-		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.put("/admission/update")
+		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.put("/update")
 				.session(session)
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON)
@@ -191,7 +192,7 @@ class AdmissionControllerTest {
 		
 		String body = objectWriter.writeValueAsString(add1);
 		
-		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.delete("/admission/cancel/1")
+		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.delete("/delAdmissions/1")
 				.session(session)
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON)
@@ -211,7 +212,7 @@ class AdmissionControllerTest {
 		
 		String body = objectWriter.writeValueAsString(admissionlist);
 		
-		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.get("/admission/allbyId/5")
+		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.get("admissions/5")
 				.session(session)
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON)
@@ -231,7 +232,7 @@ class AdmissionControllerTest {
 		
 		String body = objectWriter.writeValueAsString(admissionlist);
 		
-		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.get("/admission/allbyDate/10/Sep/2020")
+		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.get("/allbyDate/10/Sep/2020")
 				.session(session)
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON)

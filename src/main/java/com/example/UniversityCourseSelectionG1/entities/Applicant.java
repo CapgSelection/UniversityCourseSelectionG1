@@ -72,7 +72,7 @@ public class Applicant {
 	}
 	
 	public Applicant(int applicantId, String applicantName, String mobileNumber, String applicantDegree,
-			double applicantGraduation, String password, Admission admission, AdmissionStatus status,AdmissionCommiteeMember admissionCommiteeMember) {
+			double applicantGraduation, String password, Admission admission, AdmissionStatus status) {
 		super();
 		this.applicantId = applicantId;
 		this.applicantName = applicantName;

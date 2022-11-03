@@ -51,7 +51,7 @@ class ApplicantControllerTest {
 		this.mvc = MockMvcBuilders.standaloneSetup(control).build();
 	}
 
-	static Applicant app1 = new Applicant(1, "john", "83180000", "grad", 90.1, "pass", new Admission());
+	static Applicant app1 = new Applicant(1, "john", "8318000000", "grad", 9.0, "Pass@1", new Admission());
 //	static Admission add1=new Admission();
 	static Applicant app2 = new Applicant();
 	static Applicant app3 = new Applicant();
@@ -131,7 +131,7 @@ class ApplicantControllerTest {
 		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.get("/applicant/get/1").session(session)
 				.contentType(MediaType.APPLICATION_JSON);
 
-		mvc.perform(mockRequest).andExpect(status().isOk());
+		mvc.perform(mockRequest).andExpect(status().isFound());
 
 	}
 
