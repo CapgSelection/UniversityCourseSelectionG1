@@ -1,7 +1,8 @@
 package com.example.UniversityCourseSelectionG1.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+//import javax.persistence.Entity;
+//
+//import javax.persistence.Id;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
