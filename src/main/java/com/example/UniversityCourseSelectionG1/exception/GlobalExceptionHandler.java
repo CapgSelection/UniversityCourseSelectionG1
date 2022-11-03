@@ -28,7 +28,7 @@ public class GlobalExceptionHandler {
 		ExceptionDescription desc=new ExceptionDescription(e.getMessage());
 		return new ResponseEntity<ExceptionDescription>(desc, HttpStatus.FORBIDDEN);
 	}
-//<<<<<<< HEAD
+
 
 	@ExceptionHandler(value=DateNotCorrectException.class)
 	public ResponseEntity<ExceptionDescription> handleDateNotCorrectException(DateNotCorrectException e)
@@ -48,9 +48,5 @@ public class GlobalExceptionHandler {
 	    });
 	    return errors;
 	    }
-//>>>>>>> branch 'main' of https://github.com/CapgSelection/UniversityCourseSelectionG1.git
-	
-//=======
-	
-//>>>>>>> branch 'main' of https://github.com/CapgSelection/UniversityCourseSelectionG1.git
+
 }
