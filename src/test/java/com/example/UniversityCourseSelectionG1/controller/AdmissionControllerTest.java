@@ -125,7 +125,7 @@ class AdmissionControllerTest {
 
 		String getBody = objectWriter.writeValueAsString(admissionlist);
 
-		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.get("admissions/1").session(session)
+		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.get("/admissions/1").session(session)
 				.contentType(MediaType.APPLICATION_JSON).content(getBody).accept(MediaType.APPLICATION_JSON);
 
 		mockMvc.perform(mockRequest).andExpect(status().isOk());
