@@ -131,7 +131,7 @@ class ApplicantControllerTest {
 		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.get("/applicant/get/1").session(session)
 				.contentType(MediaType.APPLICATION_JSON);
 
-		mvc.perform(mockRequest).andExpect(status().isOk());
+		mvc.perform(mockRequest).andExpect(status().isFound());
 
 	}
 
