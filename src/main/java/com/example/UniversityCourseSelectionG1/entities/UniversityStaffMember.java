@@ -24,11 +24,7 @@ public class UniversityStaffMember {
 
 	@Id
 	@Column(name = "staff_id")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, 
-					generator = "staff_sequence")
-	@SequenceGenerator(name = "staff_sequence", 
-						sequenceName = "staff_sequence", 
-						allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer staffId;
 	
 	@Column(name = "staff_name")
