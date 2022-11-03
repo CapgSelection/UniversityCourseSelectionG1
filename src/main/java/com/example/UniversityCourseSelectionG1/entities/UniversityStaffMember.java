@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -26,8 +28,15 @@ public class UniversityStaffMember {
 	private Integer staffId;
 	
 	@Column(name = "staff_name")
+	@NotEmpty(message = "Staff name cannot be empty or null")
 	private String staffName;
+	
+	@NotEmpty(message = "Password cannot be empty or null")
+//	@Pattern(regexp="^[A-Za-z0-9@$!%*#?&]*$", message="password not in proper format")
+	@Pattern(regexp="(?=^.{8,}$)(?=.*\\d)(?=.*[!@#$%^&*]+)(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$", message="password not in proper format")
 	private String password;
+	
+	@NotEmpty(message = "Role cannot be empty or null")
 	private String role;
 
 }

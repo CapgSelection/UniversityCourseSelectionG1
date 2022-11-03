@@ -8,7 +8,7 @@ import com.example.UniversityCourseSelectionG1.exception.NotFoundException;
 
 
 public interface AdmissionService {
-	void addAddmission(Admission admission);
+	Admission addAdmission(Admission admission);
 
 	List<Admission> getAdmissions();
 

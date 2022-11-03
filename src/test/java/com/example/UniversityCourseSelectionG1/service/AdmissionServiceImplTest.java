@@ -70,7 +70,7 @@ class AdmissionServiceImplTests {
 		Course course=new Course();
 		course.setCourseId(1);
 	    Mockito.when(course_repo.findById(1)).thenReturn(Optional.ofNullable(course));
-		assertEquals(add1, admission_service.addAddmission(add1));
+		assertEquals(add1, admission_service.addAdmission(add1));
 	}
 	
 	
@@ -108,8 +108,8 @@ class AdmissionServiceImplTests {
 		admissionlist.add(add2);
 		admissionlist.add(add3);
 				
-		Mockito.when(admission_repo.findAllAdmissionByAdmissionDate(add2.getCourseId())).thenReturn(admissionlist);
-		assertEquals(admissionlist,admission_service.showAllAdmissionByCourseId(add2.getCourseId()));
+		Mockito.when(admission_repo.findAllAdmissionByAdmissionDate(add2.getAdmissionDate())).thenReturn(admissionlist);
+		assertEquals(admissionlist,admission_service.showAllAdmissionbyDate(add2.getAdmissionDate()));
 	}
 	
 	@Test
@@ -126,7 +126,7 @@ class AdmissionServiceImplTests {
 	@Test
 	void testAddAdmission_failure() {
 		Mockito.when(applicant_repo.existsById(add2.getApplicantId())).thenReturn(false);
-		assertThrows(NotFoundException.class,()->{admission_service.addAddmission(add2);});
+		assertThrows(NotFoundException.class,()->{admission_service.addAdmission(add2);});
 	}
 	
 	
@@ -142,7 +142,7 @@ class AdmissionServiceImplTests {
 	void testCancelAdmission_failure() {
 		Mockito.when(admission_repo.existsById(add1.getAdmissionId())).thenReturn(false);
 		//Mockito.when(admission_repo.findById(add1.getAdmissionId())).thenReturn(Optional.ofNullable(add1));
-		assertThrows(NotFoundException.class,()->{admission_service.cancelAdmission(add1.getAdmissionId());});
+		assertThrows(NotFoundException.class,()->{admission_service.delAdmissionsById(add1.getAdmissionId());});
 	}
 	
 	
@@ -151,7 +151,7 @@ class AdmissionServiceImplTests {
 	void testShowAllAdmissionByCourseId_failure() {
 		List<Admission> admissionlist = null;
 		Mockito.when(admission_repo.findByCourseId(add1.getCourseId())).thenReturn(admissionlist);
-		assertEquals(admissionlist,admission_service.showAllAdmissionByCourseId(add1.getCourseId()));
+		assertEquals(admissionlist,admission_service.showAllAdmissionbyDate(add1.getAdmissionDate()));
 		
 	}
 	
