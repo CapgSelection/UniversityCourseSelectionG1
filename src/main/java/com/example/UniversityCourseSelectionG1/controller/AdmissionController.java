@@ -23,6 +23,7 @@ import com.example.UniversityCourseSelectionG1.entities.Admission;
 import com.example.UniversityCourseSelectionG1.exception.NotFoundException;
 import com.example.UniversityCourseSelectionG1.exception.NotLoggedInException;
 import com.example.UniversityCourseSelectionG1.service.AdmissionService;
+import com.example.UniversityCourseSelectionG1.service.CourseService;
 
 
 @RestController
@@ -30,6 +31,9 @@ public class AdmissionController {
 	
 	@Autowired
 	private AdmissionService admissionServ;
+	
+	@Autowired
+	private CourseService courseServ;
 	
 	public boolean checkSession(HttpServletRequest request, String type) {
 		HttpSession session = request.getSession();
@@ -123,8 +127,9 @@ public class AdmissionController {
 		return new ResponseEntity<String>(s,HttpStatus.OK);	
 	}
 	
-	@GetMapping("admissions/{id}")
+	@GetMapping("/admission/{cId}")
 	public ResponseEntity<List<Admission>> getAdmissionbyCourse(@PathVariable int cId,HttpServletRequest request){
+		
 		boolean valid = checkSession(request, "commitee");
 		String host = String.valueOf(request.getServerPort());
 		if (!valid) {
@@ -133,13 +138,17 @@ public class AdmissionController {
 							+ "/login/commitee to login.");
 
 		}
+	
+		
 		List<Admission> admissions=admissionServ.getAdmissionbyCourse(cId);
 		return new ResponseEntity<List<Admission>>(admissions,HttpStatus.OK);
 	}
 	
 	@GetMapping("/allbyDate/{date}/{month}/{year}")
     public ResponseEntity<List<Admission>> showAllAdmissionByDate(@PathVariable String date,@PathVariable String month,@PathVariable String year,HttpServletRequest request){
+	
 		boolean valid = checkSession(request, "commitee");
+		
 		String host = String.valueOf(request.getServerPort());
 		if (!valid) {
 			throw new NotLoggedInException(

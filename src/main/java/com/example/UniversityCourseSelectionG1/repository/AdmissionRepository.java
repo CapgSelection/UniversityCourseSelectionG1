@@ -11,8 +11,8 @@ import com.example.UniversityCourseSelectionG1.entities.Admission;
 
 public interface AdmissionRepository extends JpaRepository<Admission,Integer>{
 
-	@Query("select c from Admission c where c.courseId=:cId")
-	List<Admission> findByCourseId(@Param("cId")int cId);
+	@Query("select c from Admission c where c.courseId=?1")
+	List<Admission> findByCourseId(int cId);
 
 	@Query("select c from Admission c where c.admissionDate=:localdate")
 	List<Admission> findAllAdmissionByAdmissionDate(@Param("localdate")LocalDate localdate);
