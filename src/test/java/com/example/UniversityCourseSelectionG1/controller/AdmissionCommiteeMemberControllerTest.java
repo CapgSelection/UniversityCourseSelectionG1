@@ -236,8 +236,8 @@ class AdmissionCommitteMemberControllerTest {
 		session.setAttribute("commitee", 2);
 		
 		Admission admission = new Admission(1, 1, 1, LocalDate.of(2022, 3, 10));
-		Applicant applicant = new Applicant(1, "Adesh", 12312312L, "B.Tech", 91, "pass1", admission);
-		Mockito.when(applicantService.viewApplicant(applicant.getApplicantId())).thenReturn(Optional.of(applicant));		
+		Applicant applicant = new Applicant(1, "Adesh", "9874563728", "B.Tech", 91, "pass1", admission);
+		Mockito.when(applicantService.getById(applicant.getApplicantId())).thenReturn(Optional.of(applicant));		
 		Mockito.when(committeeService.provideAdmissionResult(applicant, admission)).thenReturn(AdmissionStatus.CONFIRMED);
 
 		String updatedBody = objectWriter.writeValueAsString(applicant);
@@ -257,9 +257,9 @@ class AdmissionCommitteMemberControllerTest {
 		session.setAttribute("commitee", 2);
 		
 		Admission admission = new Admission(1, 1, 1, LocalDate.of(2022, 3, 10));
-		Applicant applicant = new Applicant(1, "Adesh", 12312312L, "B.Tech", 91, "pass1", admission);
+		Applicant applicant = new Applicant(1, "Adesh", "9475839012", "B.Tech", 91, "pass1", admission);
 		
-		Mockito.when(applicantService.viewApplicant(applicant.getApplicantId())).thenReturn(Optional.of(applicant));
+		Mockito.when(applicantService.getById(applicant.getApplicantId())).thenReturn(Optional.of(applicant));
 		Mockito.when(committeeService.provideAdmissionResult(applicant, admission)).thenReturn(AdmissionStatus.PENDING);
 
 		String updatedBody = objectWriter.writeValueAsString(applicant);
@@ -279,8 +279,8 @@ class AdmissionCommitteMemberControllerTest {
 		session.setAttribute("commitee", 2);
 		
 		Admission admission = new Admission(1, 1, 1, LocalDate.of(2022, 3, 10));
-		Applicant applicant = new Applicant(1, "Adesh", 12312312L, "B.Tech", 91, "pass1", admission);
-		Mockito.when(applicantService.viewApplicant(applicant.getApplicantId())).thenReturn(Optional.of(applicant));
+		Applicant applicant = new Applicant(1, "Adesh","9485738294", "B.Tech", 91, "pass1", admission);
+		Mockito.when(applicantService.getById(applicant.getApplicantId())).thenReturn(Optional.of(applicant));
 		Mockito.when(committeeService.provideAdmissionResult(applicant, admission)).thenReturn(AdmissionStatus.REJECTED);
 
 		String updatedBody = objectWriter.writeValueAsString(applicant);

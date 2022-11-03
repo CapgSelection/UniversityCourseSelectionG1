@@ -51,7 +51,7 @@ class ApplicantControllerTest {
 		this.mvc = MockMvcBuilders.standaloneSetup(control).build();
 	}
 
-	static Applicant app1 = new Applicant(1, "john", 9000, "grad", 90.1, "pass", new Admission());
+	static Applicant app1 = new Applicant(1, "john", "83180000", "grad", 90.1, "pass", new Admission());
 //	static Admission add1=new Admission();
 	static Applicant app2 = new Applicant();
 	static Applicant app3 = new Applicant();
@@ -169,7 +169,7 @@ class ApplicantControllerTest {
 	void testGetById_NotFoundException() throws Exception {
 		MockHttpSession session = new MockHttpSession();
 
-		Mockito.when(service.viewApplicant(7)).thenReturn(Optional.ofNullable(null));
+		Mockito.when(service.getById(7)).thenReturn(Optional.ofNullable(null));
 
 		session.setAttribute("commitee", 1);
 
