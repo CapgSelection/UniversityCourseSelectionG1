@@ -48,8 +48,9 @@ public class AdmissionCommiteeMember {
 	@Pattern(regexp="^[A-Za-z0-9@$!%*#?&]*$", message="password not in proper format")
 	private String adminPassword;
 
-	 @OneToMany(cascade = CascadeType.ALL,mappedBy = "admissionCommiteeMember")
-	 private List<Applicant> applicants;
+	@OneToMany
+//	(cascade = CascadeType.ALL,mappedBy = "admissionCommiteeMember")
+	private List<Applicant> applicants;
 
 	public AdmissionCommiteeMember() {
 		super();
