@@ -47,7 +47,7 @@ public class AdmissionController {
 	}
 	
 	@PostMapping("/addAdmission")
-	public ResponseEntity<String> addAddmission(@RequestBody Admission admission,HttpServletRequest request){
+	public ResponseEntity<Admission> addAddmission(@RequestBody Admission admission,HttpServletRequest request){
 		boolean valid=checkSession(request,"applicant");
 		String host = String.valueOf(request.getServerPort());
 		if(!valid) {
@@ -58,8 +58,8 @@ public class AdmissionController {
 		if(admission.getApplicantId()!=(int)session.getAttribute("applicant")){
 			throw new NotLoggedInException("You can only update your own details");
 		}
-		admissionServ.addAddmission(admission);
-		return new ResponseEntity<String>("Added Successfully",HttpStatus.OK);
+		Admission add=admissionServ.addAdmission(admission);
+		return new ResponseEntity<Admission>(add,HttpStatus.OK);
 		
 	}
 	

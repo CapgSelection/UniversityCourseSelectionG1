@@ -99,7 +99,7 @@ class AdmissionControllerTest {
 		MockHttpSession session = new MockHttpSession();
 		session.setAttribute("commitee", 2);
 		
-		Mockito.when(admission_service.cancelAdmission(add1.getAdmissionId())).thenReturn(add1);
+		Mockito.when(admission_service.delAdmissionsById(add1.getAdmissionId())).thenReturn("Deleted Successfully");
 				
 		String getBody = objectWriter.writeValueAsString(add1);
 
@@ -120,7 +120,7 @@ class AdmissionControllerTest {
 		List<Admission> admissionlist = new ArrayList<>();
 		admissionlist.add(add2);
 		admissionlist.add(add3);
-		Mockito.when(admission_service.showAllAdmissionByCourseId(add2.getCourseId())).thenReturn(admissionlist);
+		Mockito.when(admission_service.getAdmissionbyCourse(add2.getCourseId())).thenReturn(admissionlist);
 
 		String getBody = objectWriter.writeValueAsString(admissionlist);
 
@@ -243,13 +243,10 @@ class AdmissionControllerTest {
 	}
 	
 	
-	
+	//test
 	
 		
 	
 	
 }
 
-public class AdmissionControllerTest {
-
-}
