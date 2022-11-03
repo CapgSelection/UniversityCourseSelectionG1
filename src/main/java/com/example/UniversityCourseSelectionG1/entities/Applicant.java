@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 //import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -56,7 +58,12 @@ public class Applicant {
 	
 	AdmissionStatus status;
 
-
+	@ManyToMany
+	@JoinTable(
+			  name = "Applicant_Course", 
+			  joinColumns = @JoinColumn(name = "Applicant_ID"), 
+			  inverseJoinColumns = @JoinColumn(name = "course_id"))
+	Course course;
 	
 	public Applicant() {
 		super();

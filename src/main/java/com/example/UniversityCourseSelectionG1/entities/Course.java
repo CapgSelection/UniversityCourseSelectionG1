@@ -56,6 +56,7 @@ public class Course {
 	private double courseCriteria;
 	
 	
+	
 	private String status;
 	
 	public Course() {
