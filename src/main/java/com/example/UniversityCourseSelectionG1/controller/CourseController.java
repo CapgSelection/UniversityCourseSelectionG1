@@ -38,7 +38,7 @@ public class CourseController {
 		if(!courses.isEmpty()) {
 			return new ResponseEntity<List<Course>>(courses, HttpStatus.OK);
 		}		else {
-			throw new NotFoundException("Sorry!!!, no courses available..");
+			throw new NotFoundException("Sorry!, no courses available!!");
 	}	
 	}
 
