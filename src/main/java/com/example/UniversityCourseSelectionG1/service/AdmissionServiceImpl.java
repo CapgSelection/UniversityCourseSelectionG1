@@ -64,7 +64,7 @@ public class AdmissionServiceImpl implements AdmissionService {
 	public List<Admission> getAdmissionbyCourse(int cId) {
 		// TODO Auto-generated method stub
 		List<Admission> list = admissionRepo.findByCourseId(cId);
-		if(list.isEmpty())
+		if(list==null)
 			throw new NotFoundException("Couse Id not found");
 		else
 			return list;
@@ -74,7 +74,7 @@ public class AdmissionServiceImpl implements AdmissionService {
 	public List<Admission> showAllAdmissionbyDate(LocalDate localdate) {
 		// TODO Auto-generated method stub
 		List<Admission> admissionlist = admissionRepo.findAllAdmissionByAdmissionDate(localdate);	
-		if(admissionlist.isEmpty())
+		if(admissionlist==null)
 			throw new NotFoundException("No student admitted on this date");
 		return admissionlist;
 	}

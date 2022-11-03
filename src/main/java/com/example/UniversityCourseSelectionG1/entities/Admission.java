@@ -30,8 +30,8 @@ public class Admission {
 	@Column(name="applicant_Id")
 	private int applicantId;
 	@Column(name="admission_Date")
-	//@JsonDeserialize(using = LocalDateDeserializer.class)  
-	//@JsonSerialize(using = LocalDateSerializer.class)
+	@JsonDeserialize(using = LocalDateDeserializer.class)  
+	@JsonSerialize(using = LocalDateSerializer.class)
 	@JsonFormat(pattern = "dd-MMM-yyyy")
 	private LocalDate admissionDate;
 
