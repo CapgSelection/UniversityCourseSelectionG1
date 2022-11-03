@@ -1,5 +1,6 @@
 package com.example.UniversityCourseSelectionG1.entities;
 
+import java.util.List;
 import java.util.Objects;
 
 //import javax.persistence.CascadeType;
@@ -63,7 +64,7 @@ public class Applicant {
 			  name = "Applicant_Course", 
 			  joinColumns = @JoinColumn(name = "Applicant_ID"), 
 			  inverseJoinColumns = @JoinColumn(name = "course_id"))
-	Course course;
+	List<Course> course;
 	
 	public Applicant() {
 		super();
