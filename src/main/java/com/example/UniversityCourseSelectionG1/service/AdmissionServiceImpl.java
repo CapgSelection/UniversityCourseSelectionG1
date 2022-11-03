@@ -23,7 +23,7 @@ public class AdmissionServiceImpl implements AdmissionService {
 	@Autowired
 	private CourseRepository courseRepo;
 	@Override
-	public void addAddmission(Admission admission){
+	public Admission addAdmission(Admission admission){
 		// TODO Auto-generated method stub
 		if((!courseRepo.existsById(admission.getCourseId())) || (applicantRepo.existsById(admission.getApplicantId()))) {
 			throw new NotFoundException("Can't save admission details");
@@ -31,6 +31,7 @@ public class AdmissionServiceImpl implements AdmissionService {
 		else
 		{
 			admissionRepo.save(admission);
+			return admission;
 		}
 		
 	}
