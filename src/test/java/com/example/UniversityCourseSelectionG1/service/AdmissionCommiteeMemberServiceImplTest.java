@@ -151,7 +151,7 @@ class AdmissionCommitteeMemberServiceImplTest {
 		Mockito.when(CourseRepo.existsById(course.getCourseId())).thenReturn(true);
 		Mockito.when(CourseRepo.findById(course.getCourseId())).thenReturn(Optional.of(course));
 		
-		Mockito.when(ApplicantRepo.save(applicant)).thenReturn(applicant);
+		Mockito.lenient().when(ApplicantRepo.save(applicant)).thenReturn(applicant);
 				
 		assertEquals(AdmissionStatus.CONFIRMED, service.provideAdmissionResult(applicant, admission));
 	}
@@ -161,7 +161,7 @@ class AdmissionCommitteeMemberServiceImplTest {
 	{
 		Course course = new Course(1,"Java Programming","2 months",LocalDate.of(2022, 6, 25),LocalDate.of(2022, 8, 25),"700",90.5);
 		Admission admission = new Admission(1, 1, 1, LocalDate.of(2022, 3, 10));
-		Applicant applicant = new Applicant(1, "Adesh", "12312312", "B.Tech", 89, "pass1", admission);
+		Applicant applicant = new Applicant(1, "Adesh", "1234567890", "B.Tech", 9, "Pass@1", admission,AdmissionStatus.APPLIED);
 		
 		Mockito.when(ApplicantRepo.existsById(applicant.getApplicantId())).thenReturn(true);
 		Mockito.when(ApplicantRepo.findById(applicant.getApplicantId())).thenReturn(Optional.of(applicant));
@@ -172,7 +172,7 @@ class AdmissionCommitteeMemberServiceImplTest {
 		Mockito.when(CourseRepo.existsById(course.getCourseId())).thenReturn(true);
 		Mockito.when(CourseRepo.findById(course.getCourseId())).thenReturn(Optional.of(course));
 		
-		Mockito.when(ApplicantRepo.save(applicant)).thenReturn(applicant);
+		Mockito.lenient().when(ApplicantRepo.save(applicant)).thenReturn(applicant);
 		
 		assertEquals(AdmissionStatus.PENDING, service.provideAdmissionResult(applicant, admission));
 	}
@@ -193,7 +193,7 @@ class AdmissionCommitteeMemberServiceImplTest {
 		Mockito.when(CourseRepo.existsById(course.getCourseId())).thenReturn(true);
 		Mockito.when(CourseRepo.findById(course.getCourseId())).thenReturn(Optional.of(course));
 		
-		Mockito.when(ApplicantRepo.save(applicant)).thenReturn(applicant);
+		Mockito.lenient().when(ApplicantRepo.save(applicant)).thenReturn(applicant);
 		
 		assertEquals(AdmissionStatus.REJECTED, service.provideAdmissionResult(applicant, admission));
 	}

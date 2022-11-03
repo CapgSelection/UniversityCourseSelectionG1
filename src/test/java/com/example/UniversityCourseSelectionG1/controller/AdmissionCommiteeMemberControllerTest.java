@@ -154,7 +154,7 @@ class AdmissionCommitteMemberControllerTest {
 		MockHttpSession session = new MockHttpSession();
 		session.setAttribute("commitee", 2);
 
-		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.get("/uni/committee/view/1").session(session)
+		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.get("/uni/commitee/view/1").session(session)
 				.contentType(MediaType.APPLICATION_JSON);
 
 		assertThatThrownBy(()-> mockMvc.perform(mockRequest))
