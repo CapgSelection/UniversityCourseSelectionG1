@@ -58,7 +58,7 @@ public class UniversityStaffController {
 	}
 
 	@PutMapping("/update")
-	public ResponseEntity<UniversityStaffMember> updateStaff(@RequestBody UniversityStaffMember usm, HttpServletRequest request) {
+	public ResponseEntity<UniversityStaffMember> updateStaff(@Valid @RequestBody UniversityStaffMember usm, HttpServletRequest request) {
 		if(!checkSession(request, "staffMember")) {
 			String port = String.valueOf(request.getServerPort());
 			throw new NotLoggedInException("Accessible to staff only. If you are a registered staff member, click http://localhost:"+port+"/login/staffMember to login.");
