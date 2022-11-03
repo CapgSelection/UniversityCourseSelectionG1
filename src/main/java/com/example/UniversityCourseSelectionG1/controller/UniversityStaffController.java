@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.UniversityCourseSelectionG1.exception.NotLoggedInException;
+import com.example.UniversityCourseSelectionG1.exception.NotFoundException;
 import com.example.UniversityCourseSelectionG1.entities.Course;
 import com.example.UniversityCourseSelectionG1.entities.UniversityStaffMember;
 import com.example.UniversityCourseSelectionG1.service.CourseService;
@@ -53,29 +54,52 @@ public class UniversityStaffController {
 			throw new NotLoggedInException("Accessible to staff only. If you are a registered staff member, click http://localhost:"+port+"/login/staffMember to login.");
 		}
 		UniversityStaffMember savedUSM = usmService.addStaff(usm);
-		return new ResponseEntity<>(savedUSM, HttpStatus.CREATED);
+		return new ResponseEntity<>(savedUSM, HttpStatus.OK);
 	}
 
 	@PutMapping("/update")
-	public ResponseEntity<UniversityStaffMember> updateStaff(@Valid @RequestBody UniversityStaffMember usm, HttpServletRequest request) {
+	public ResponseEntity<UniversityStaffMember> updateStaff(@RequestBody UniversityStaffMember usm, HttpServletRequest request) {
 		if(!checkSession(request, "staffMember")) {
 			String port = String.valueOf(request.getServerPort());
 			throw new NotLoggedInException("Accessible to staff only. If you are a registered staff member, click http://localhost:"+port+"/login/staffMember to login.");
+		}
+		if(usm == null || usm.getStaffId() == null) {
+			throw new NotFoundException("Staff record or ID cannot be null!");
 		}
 		UniversityStaffMember updatedUSM = usmService.updateStaff(usm);
 		return new ResponseEntity<>(updatedUSM, HttpStatus.OK);
 	}
 
 	@GetMapping("/view/{id}")
-	public ResponseEntity<UniversityStaffMember> viewStaffById(@PathVariable int id) {
-		UniversityStaffMember fetchedUSM = usmService.viewStaff(id);
-		return new ResponseEntity<>(fetchedUSM, HttpStatus.FOUND);
+	public ResponseEntity<UniversityStaffMember> viewStaffById(@PathVariable int id, HttpServletRequest request) {
+//		UniversityStaffMember fetchedUSM = usmService.viewStaff(id);
+//		return new ResponseEntity<>(fetchedUSM, HttpStatus.OK);
+//		
+		
+		HttpSession session = request.getSession(true);
+		Integer loginStaffId = null;
+		
+		if(!session.isNew()) {
+			loginStaffId = (int)session.getAttribute("staffMember");
+		}
+		
+		if(loginStaffId!=null && loginStaffId==id) {
+			UniversityStaffMember ref = usmService.viewStaff(id);
+			return new ResponseEntity<>(ref, HttpStatus.OK);
+		}
+		
+		UniversityStaffMember ref = usmService.viewStaff(id);
+		ref.setPassword("*******");
+		return new ResponseEntity<>(ref, HttpStatus.OK);	
 	}
 
 	@GetMapping("/view/all")
 	public ResponseEntity<List<UniversityStaffMember>> viewAllStaff() {
-		List<UniversityStaffMember> fetchedUSMList = usmService.viewAllStaffs();
-		return new ResponseEntity<>(fetchedUSMList, HttpStatus.FOUND);
+		
+		
+		List<UniversityStaffMember> ref = usmService.viewAllStaffs();
+		ref.forEach(s->s.setPassword("*******"));
+		return new ResponseEntity<>(ref, HttpStatus.OK);
 	}
 
 	@DeleteMapping("/delete/{id}")
@@ -95,7 +119,7 @@ public class UniversityStaffController {
 			throw new NotLoggedInException("Accessible to staff only. If you are a registered staff member, click http://localhost:"+port+"/login/staffMember to login.");
 		}
 		Course savedCourse = courseService.addCourse(course);
-		return new ResponseEntity<>(savedCourse, HttpStatus.CREATED);
+		return new ResponseEntity<>(savedCourse, HttpStatus.OK);
 	}
 
 	@PutMapping("/course/update")
