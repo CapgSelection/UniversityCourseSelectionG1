@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -46,7 +47,7 @@ public class UniversityStaffController {
 	}
 
 	@PostMapping("/add")
-	public ResponseEntity<UniversityStaffMember> addStaff(@RequestBody UniversityStaffMember usm, HttpServletRequest request) {
+	public ResponseEntity<UniversityStaffMember> addStaff(@Valid @RequestBody UniversityStaffMember usm, HttpServletRequest request) {
 		if(!checkSession(request, "staffMember")) {
 			String port = String.valueOf(request.getServerPort());			
 			throw new NotLoggedInException("Accessible to staff only. If you are a registered staff member, click http://localhost:"+port+"/login/staffMember to login.");
@@ -56,7 +57,7 @@ public class UniversityStaffController {
 	}
 
 	@PutMapping("/update")
-	public ResponseEntity<UniversityStaffMember> updateStaff(@RequestBody UniversityStaffMember usm, HttpServletRequest request) {
+	public ResponseEntity<UniversityStaffMember> updateStaff(@Valid @RequestBody UniversityStaffMember usm, HttpServletRequest request) {
 		if(!checkSession(request, "staffMember")) {
 			String port = String.valueOf(request.getServerPort());
 			throw new NotLoggedInException("Accessible to staff only. If you are a registered staff member, click http://localhost:"+port+"/login/staffMember to login.");
