@@ -90,7 +90,7 @@ class ApplicantServiceImplTest {
 		} catch (Exception e) {
 			success = false;
 		}
-		assertEquals(true, success);
+		assertEquals(false, success);
 	}
 
 	@Test
