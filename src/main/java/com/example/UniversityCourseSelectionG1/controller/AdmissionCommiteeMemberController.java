@@ -70,7 +70,7 @@ public class AdmissionCommiteeMemberController
 	{
 		if(!checkSession(request, "commitee")) {
 			String port = String.valueOf(request.getServerPort());			
-			throw new NotLoggedInException("Accessible to commitee only. If you are a registered commitee member, click http://localhost:"+port+"/login/commitee to login.");
+			throw new NotLoggedInException("Accessible to commitee only. If you are a registered commitee member, click http://localhost:"+port+"/login/commitee/auth to login.");
 		}
 		if (member == null) {
 			throw new NotFoundException("Committee Member is Null !");
@@ -85,7 +85,7 @@ public class AdmissionCommiteeMemberController
 	{
 		if(!checkSession(request, "commitee")) {
 			String port = String.valueOf(request.getServerPort());			
-			throw new NotLoggedInException("Accessible to commitee only. If you are a registered commitee member, click http://localhost:"+port+"/login/commitee to login.");
+			throw new NotLoggedInException("Accessible to commitee only. If you are a registered commitee member, click http://localhost:"+port+"/login/commitee/auth to login.");
 		}
 		if (member == null) {
 			throw new NotFoundException("AdmissionCommiteeMember not available");
