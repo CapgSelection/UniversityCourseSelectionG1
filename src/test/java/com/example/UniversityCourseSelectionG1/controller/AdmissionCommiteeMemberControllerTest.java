@@ -61,10 +61,12 @@ class AdmissionCommitteMemberControllerTest {
 		this.mockMvc = MockMvcBuilders.standaloneSetup(commiteeController).build();
 	}
 
-	AdmissionCommiteeMember member1 = new AdmissionCommiteeMember(1, "member_1", "1111", "mem@1", "pass1");
-	AdmissionCommiteeMember member2 = new AdmissionCommiteeMember(2, "member_2", "2222", "mem@2", "pass2");
-	AdmissionCommiteeMember member3 = new AdmissionCommiteeMember(3, "member_3", "3333", "mem@3", "pass3");
+	AdmissionCommiteeMember member1 = new AdmissionCommiteeMember(1, "member_1", "1234567890", "Adesh Sharma", "Pass@1");
+	AdmissionCommiteeMember member2 = new AdmissionCommiteeMember(2, "member_2", "1234567890", "Kumar Varun", "Pass@2");
+	AdmissionCommiteeMember member3 = new AdmissionCommiteeMember(3, "member_3", "1234567890", "Ramaya Ramapriya", "Pass@3");
 
+<<<<<<< HEAD
+=======
 
 	@Test
 	public void addAddmissioncommiteeMember_success() throws Exception {
@@ -72,9 +74,11 @@ class AdmissionCommitteMemberControllerTest {
 		
 		MockHttpSession session = new MockHttpSession();
 		session.setAttribute("commitee", 2);
+>>>>>>> branch 'main' of https://github.com/CapgSelection/UniversityCourseSelectionG1
 
-		String body = objectWriter.writeValueAsString(member1);
 
+<<<<<<< HEAD
+=======
 		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.post("/uni/commitee/add").session(session)
 				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).content(body);
 
@@ -143,6 +147,7 @@ class AdmissionCommitteMemberControllerTest {
 	
 	
 	
+>>>>>>> branch 'main' of https://github.com/CapgSelection/UniversityCourseSelectionG1
 	@Test
 	void viewcommiteeMemberById_success() throws Exception {
 		AdmissionCommiteeMember updated_member = new AdmissionCommiteeMember(1, "new_member", "8888", "new@1",
@@ -197,7 +202,7 @@ class AdmissionCommitteMemberControllerTest {
 		.andExpect(jsonPath("$", notNullValue()))
 		.andExpect(jsonPath("$[0].adminName", is("member_1")))
 		.andExpect(jsonPath("$[1].adminPassword", is("*******")))
-		.andExpect(jsonPath("$[2].adminContact", is("3333")));
+		.andExpect(jsonPath("$[2].adminContact", is("1234567890")));
 	}
 	
 	
@@ -276,8 +281,8 @@ class AdmissionCommitteMemberControllerTest {
 		session.setAttribute("commitee", 2);
 		
 		Admission admission = new Admission(1, 1, 1, LocalDate.of(2022, 3, 10));
-		Course course=new Course(1,"Maths","10",LocalDate.of(2022, 9, 1),LocalDate.of(2022, 9, 30),"1000",7.0D);
-		Applicant applicant = new Applicant(1, "Adesh", "9475839012", "B.Tech", 5, "pass1", admission);
+//		Course course=new Course(1,"Maths","10",LocalDate.of(2022, 9, 1),LocalDate.of(2022, 9, 30),"1000",7.0D);
+		Applicant applicant = new Applicant(1, "Adesh", "9475839012", "B.Tech", 5, "pass@1", admission);
 		
 		Mockito.when(applicantService.getById(applicant.getApplicantId())).thenReturn(Optional.of(applicant));
 		Mockito.when(commiteeService.provideAdmissionResult(applicant, admission)).thenReturn(AdmissionStatus.PENDING);
@@ -287,8 +292,8 @@ class AdmissionCommitteMemberControllerTest {
 		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.get("/uni/commitee/getResult/1").session(session)
 				.contentType(MediaType.APPLICATION_JSON).content(updatedBody).accept(MediaType.APPLICATION_JSON);
 
-		mockMvc.perform(mockRequest).andExpect(jsonPath("$.['applicantId']", is(1)))
-				.andExpect(jsonPath("$.status", is("PENDING")));
+		mockMvc.perform(mockRequest).andExpect(jsonPath("$", notNullValue()))
+				.andExpect(jsonPath("$", is("PENDING")));
 	}
 	
 	

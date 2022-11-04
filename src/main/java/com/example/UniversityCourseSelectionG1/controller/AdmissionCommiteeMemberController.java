@@ -1,6 +1,7 @@
 package com.example.UniversityCourseSelectionG1.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -151,8 +152,15 @@ public class AdmissionCommiteeMemberController
 			throw new NotLoggedInException("Accessible to commitee only. If you are a registered commitee member, click http://localhost:"+port+"/login/commitee to login.");
 		}
 		
-		Applicant applicant=applicantService.getById(id).get();
-		Admission admission=applicant.getAdmission();
+		Applicant applicant=null;
+		Admission admission=null;
+		Optional<Applicant> op1=applicantService.getById(id);
+		
+		if(op1.isPresent())
+		{
+			applicant = op1.get();
+			admission = applicant.getAdmission();
+		}
 		
 		if (applicant == null || admission == null) {
 			throw new NotFoundException("Applicant or Admission is Null !");
