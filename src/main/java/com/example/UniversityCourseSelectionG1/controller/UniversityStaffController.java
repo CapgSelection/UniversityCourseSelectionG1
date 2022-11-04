@@ -51,7 +51,7 @@ public class UniversityStaffController {
 	public ResponseEntity<UniversityStaffMember> addStaff(@Valid @RequestBody UniversityStaffMember usm, HttpServletRequest request) {
 		if(!checkSession(request, "staffMember")) {
 			String port = String.valueOf(request.getServerPort());			
-			throw new NotLoggedInException("Accessible to staff only. If you are a registered staff member, click http://localhost:"+port+"/login/staffMember to login.");
+			throw new NotLoggedInException("Accessible to staff only. If you are a registered staff member, click http://localhost:"+port+"/login/staffMember/auth to login.");
 		}
 		UniversityStaffMember savedUSM = usmService.addStaff(usm);
 		return new ResponseEntity<>(savedUSM, HttpStatus.OK);
@@ -61,7 +61,7 @@ public class UniversityStaffController {
 	public ResponseEntity<UniversityStaffMember> updateStaff(@Valid @RequestBody UniversityStaffMember usm, HttpServletRequest request) {
 		if(!checkSession(request, "staffMember")) {
 			String port = String.valueOf(request.getServerPort());
-			throw new NotLoggedInException("Accessible to staff only. If you are a registered staff member, click http://localhost:"+port+"/login/staffMember to login.");
+			throw new NotLoggedInException("Accessible to staff only. If you are a registered staff member, click http://localhost:"+port+"/login/staffMember/auth to login.");
 		}
 		if(usm == null || usm.getStaffId() == null) {
 			throw new NotFoundException("Staff record or ID cannot be null!");
@@ -106,7 +106,7 @@ public class UniversityStaffController {
 	public ResponseEntity<String> deleteStaffById(@PathVariable int id, HttpServletRequest request) {
 		if(!checkSession(request, "staffMember")) {
 			String port = String.valueOf(request.getServerPort());
-			throw new NotLoggedInException("Accessible to staff only. If you are a registered staff member, click http://localhost:"+port+"/login/staffMember to login.");
+			throw new NotLoggedInException("Accessible to staff only. If you are a registered staff member, click http://localhost:"+port+"/login/staffMember/auth to login.");
 		}
 		usmService.removeStaff(id);
 		return new ResponseEntity<String>("Staff with id: " + id + " deleted successfully!", HttpStatus.OK);
@@ -116,7 +116,7 @@ public class UniversityStaffController {
 	public ResponseEntity<Course> addCourse(@RequestBody Course course, HttpServletRequest request) {
 		if(!checkSession(request, "staffMember")) {
 			String port = String.valueOf(request.getServerPort());
-			throw new NotLoggedInException("Accessible to staff only. If you are a registered staff member, click http://localhost:"+port+"/login/staffMember to login.");
+			throw new NotLoggedInException("Accessible to staff only. If you are a registered staff member, click http://localhost:"+port+"/login/staffMember/auth to login.");
 		}
 		Course savedCourse = courseService.addCourse(course);
 		return new ResponseEntity<>(savedCourse, HttpStatus.OK);
@@ -126,7 +126,7 @@ public class UniversityStaffController {
 	public ResponseEntity<Course> updateCourse(@RequestBody Course course, HttpServletRequest request) {
 		if(!checkSession(request, "staffMember")) {
 			String port = String.valueOf(request.getServerPort());
-			throw new NotLoggedInException("Accessible to staff only. If you are a registered staff member, click http://localhost:"+port+"/login/staffMember to login.");
+			throw new NotLoggedInException("Accessible to staff only. If you are a registered staff member, click http://localhost:"+port+"/login/staffMember/auth to login.");
 		}
 		Course updatedourse = courseService.updateCourse(course);
 		return new ResponseEntity<>(updatedourse, HttpStatus.OK);
@@ -136,7 +136,7 @@ public class UniversityStaffController {
 	public ResponseEntity<String> deleteCourseById(@PathVariable int id, HttpServletRequest request) {
 		if(!checkSession(request, "staffMember")) {
 			String port = String.valueOf(request.getServerPort());
-			throw new NotLoggedInException("Accessible to staff only. If you are a registered staff member, click http://localhost:"+port+"/login/staffMember to login.");
+			throw new NotLoggedInException("Accessible to staff only. If you are a registered staff member, click http://localhost:"+port+"/login/staffMember/auth to login.");
 		}
 		courseService.removeCourse(id);
 		return new ResponseEntity<>("Course with id: " + id + " deleted successfully!", HttpStatus.OK);
