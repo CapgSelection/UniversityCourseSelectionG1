@@ -65,8 +65,89 @@ class AdmissionCommitteMemberControllerTest {
 	AdmissionCommiteeMember member2 = new AdmissionCommiteeMember(2, "member_2", "1234567890", "Kumar Varun", "Pass@2");
 	AdmissionCommiteeMember member3 = new AdmissionCommiteeMember(3, "member_3", "1234567890", "Ramaya Ramapriya", "Pass@3");
 
+<<<<<<< HEAD
+=======
+
+	@Test
+	public void addAddmissioncommiteeMember_success() throws Exception {
+		Mockito.when(commiteeService.addCommiteeMember(member1)).thenReturn(member1);
+		
+		MockHttpSession session = new MockHttpSession();
+		session.setAttribute("commitee", 2);
+>>>>>>> branch 'main' of https://github.com/CapgSelection/UniversityCourseSelectionG1
 
 
+<<<<<<< HEAD
+=======
+		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.post("/uni/commitee/add").session(session)
+				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).content(body);
+
+		mockMvc.perform(mockRequest).andExpect(status().isOk()).andExpect(jsonPath("$", notNullValue()))
+				.andExpect(jsonPath("$.adminName", is("member_1"))).andExpect(jsonPath("$.adminContact", is("1111")))
+				.andExpect(jsonPath("$.adminUsername", is("mem@1")))
+				.andExpect(jsonPath("$.adminPassword", is("pass1")));
+	}
+
+	@Test
+	void updatecommiteeMember_success() throws Exception {
+		AdmissionCommiteeMember updated_member = new AdmissionCommiteeMember(1, "newMember", "1234567890", "New1",
+				"Pass@10");
+
+		Mockito.when(commiteeService.updateCommiteeMember(updated_member)).thenReturn(updated_member);
+		
+		MockHttpSession session = new MockHttpSession();
+		session.setAttribute("commitee", 2);
+
+		String updatedBody = objectWriter.writeValueAsString(updated_member);
+
+		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.put("/uni/commitee/update").session(session)
+				.contentType(MediaType.APPLICATION_JSON).content(updatedBody).accept(MediaType.APPLICATION_JSON);
+
+		mockMvc.perform(mockRequest).andExpect(status().isOk()).andExpect(jsonPath("$", notNullValue()))
+				.andExpect(jsonPath("$.adminContact", is("1234567890"))).andExpect(jsonPath("$.adminPassword", is("Pass@10")));
+	}
+	
+	@Test
+	void updatecommiteeMember_failureWhenNotFound() throws Exception{
+		AdmissionCommiteeMember updated_member = new AdmissionCommiteeMember(1, "newMember", "1234567890", "Admin@1",
+				"Pass@10");
+
+		Mockito.when(commiteeService.updateCommiteeMember(updated_member)).thenThrow(new NotFoundException("AdmissionCommiteeMember not available"));
+		
+		MockHttpSession session = new MockHttpSession();
+		session.setAttribute("commitee", 2);
+
+		String updatedBody = objectWriter.writeValueAsString(updated_member);
+
+		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.put("/uni/commitee/update").session(session)
+				.contentType(MediaType.APPLICATION_JSON).content(updatedBody).accept(MediaType.APPLICATION_JSON);
+
+		assertThatThrownBy(()-> mockMvc.perform(mockRequest))
+		.hasRootCause(new NotFoundException("AdmissionCommiteeMember not available"));
+	}
+
+
+
+	
+
+	@Test
+	void deletecommiteeMember_DoesNotExists() throws Exception {
+		
+		MockHttpSession session = new MockHttpSession();
+		session.setAttribute("commitee", 2);
+		
+		Mockito.doThrow(NotFoundException.class).when(commiteeService).removeCommiteeMember(30);
+
+		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.delete("/uni/commitee/delete/30").session(session)
+				.contentType(MediaType.APPLICATION_JSON);
+		
+		assertThatThrownBy(()-> mockMvc.perform(mockRequest)).hasRootCauseInstanceOf(NotFoundException.class);
+
+	} 
+	
+	
+	
+>>>>>>> branch 'main' of https://github.com/CapgSelection/UniversityCourseSelectionG1
 	@Test
 	void viewcommiteeMemberById_success() throws Exception {
 		AdmissionCommiteeMember updated_member = new AdmissionCommiteeMember(1, "new_member", "8888", "new@1",
@@ -191,6 +272,7 @@ class AdmissionCommitteMemberControllerTest {
 				.andExpect(jsonPath("$", is("CONFIRMED")));
 	}
 	
+
 	
 	@Test
 	void testGetAdmissionResult_Pending() throws Exception

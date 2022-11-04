@@ -109,7 +109,7 @@ class ApplicantControllerTest {
 		MockHttpSession session = new MockHttpSession();
 
 		session.setAttribute("applicant", 1);
-
+//delete/id
 		Mockito.lenient().when(service.delApplicant(app1)).thenReturn(app1);
 
 		String delBody = objectWriter.writeValueAsString(app1);
