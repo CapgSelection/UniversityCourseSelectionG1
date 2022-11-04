@@ -21,7 +21,7 @@ public class UniversityStaffMemberServiceImpl implements UniversityStaffMemberSe
 	@Override
 	public UniversityStaffMember addStaff(UniversityStaffMember usm) {
 		UniversityStaffMember savedUSM =  staffRepo.save(usm);
-		savedUSM.setPassword("******");
+		//savedUSM.setPassword("******");
 		return savedUSM;
 	}
 
@@ -29,11 +29,12 @@ public class UniversityStaffMemberServiceImpl implements UniversityStaffMemberSe
 	public UniversityStaffMember updateStaff(UniversityStaffMember usm) {
 		if (staffRepo.existsById(usm.getStaffId())) {
 			UniversityStaffMember updatedUSM = staffRepo.save(usm);
-			updatedUSM.setPassword("******");
+			//updatedUSM.setPassword("******");
 			return updatedUSM;
 		} 
 		else {
-			throw new NotFoundException("Staff with id: " + usm.getStaffId() + " not found!");
+			//throw new NotFoundException("Staff with id: " + usm.getStaffId() + " not found!");
+			throw new NotFoundException("Staff record or ID cannot be null!");
 		}
 	}
 
@@ -41,7 +42,7 @@ public class UniversityStaffMemberServiceImpl implements UniversityStaffMemberSe
 	public UniversityStaffMember viewStaff(int id) {
 		if (staffRepo.existsById(id)) {
 			UniversityStaffMember usm = staffRepo.getReferenceById(id);
-			usm.setPassword("******");
+			//usm.setPassword("******");
 			return usm;
 		} 
 		else {
@@ -70,7 +71,7 @@ public class UniversityStaffMemberServiceImpl implements UniversityStaffMemberSe
 		if (usmList.isEmpty()) {
 			throw new NotFoundException("No staff records found!");
 		}
-		usmList.forEach(usm -> usm.setPassword("******"));
+		//usmList.forEach(usm -> usm.setPassword("******"));
 		return usmList;
 	}
 

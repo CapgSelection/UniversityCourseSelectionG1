@@ -1,5 +1,5 @@
 package com.example.UniversityCourseSelectionG1.controller;
-//package com.capgemini.UniversityCourseSelection.controllers;
+
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.hamcrest.CoreMatchers.is;
@@ -59,9 +59,9 @@ class StaffControllerTest {
 		this.mockMvc = MockMvcBuilders.standaloneSetup(staffController).build();
 	}
 	
-	UniversityStaffMember STAFF_1 = new UniversityStaffMember(1,"staff1","password1","role1");
-	UniversityStaffMember STAFF_2 = new UniversityStaffMember(2,"staff2","password2","role2");
-	UniversityStaffMember STAFF_3 = new UniversityStaffMember(3,"staff3","password3","role3");
+	UniversityStaffMember STAFF_1 = new UniversityStaffMember(1,"staff1","Pass@123","role1");
+	UniversityStaffMember STAFF_2 = new UniversityStaffMember(2,"staff2","Pass@1234","role2");
+	UniversityStaffMember STAFF_3 = new UniversityStaffMember(3,"staff3","Pass@12345","role3");
 	
 	Course COURSE_1 = new Course(1,"Java Programming","2 months",LocalDate.of(2022,3,10),LocalDate.of(2022,5,10),"700",96.5);
 	
@@ -83,7 +83,7 @@ class StaffControllerTest {
 		mockMvc.perform(mockRequest)
 		.andExpect(status().isOk())
 		.andExpect(jsonPath("$", notNullValue()))
-		.andExpect(jsonPath("$.password", is("password1")))
+		.andExpect(jsonPath("$.password", is("Pass@123")))
 		.andExpect(jsonPath("$.role", is("role1")));
 	}
 	
@@ -106,7 +106,7 @@ class StaffControllerTest {
 
 	@Test
 	void updateStaff_successWithLogin() throws Exception {
-		UniversityStaffMember updatedStaff = new UniversityStaffMember(1,"new_staff","new_pwd","new_role");
+		UniversityStaffMember updatedStaff = new UniversityStaffMember(1,"new_staff","New_pwd@123","new_role");
 		
 		MockHttpSession session = new MockHttpSession();
 		session.setAttribute("staffMember", 1);
@@ -124,13 +124,13 @@ class StaffControllerTest {
 		mockMvc.perform(mockRequest)
 		.andExpect(status().isOk())
 		.andExpect(jsonPath("$", notNullValue()))
-		.andExpect(jsonPath("$.password", is("new_pwd")))
+		.andExpect(jsonPath("$.password", is("New_pwd@123")))
 		.andExpect(jsonPath("$.role", is("new_role")));
 	}
 	
 	@Test
 	void updateStaff_failWhenNotFound() throws Exception {
-		UniversityStaffMember updatedStaff = new UniversityStaffMember(5,"new_staff","new_pwd","new_role");
+		UniversityStaffMember updatedStaff = new UniversityStaffMember(5,"new_staff","New_pwd@123","new_role");
 		
 		MockHttpSession session = new MockHttpSession();
 		session.setAttribute("staffMember", 1);
@@ -152,7 +152,7 @@ class StaffControllerTest {
 	
 	@Test
 	void updateStaff_failWhenRecordOrIdIsNull() throws Exception {
-		UniversityStaffMember updatedStaff = new UniversityStaffMember(null,"new_staff","new_pwd","new_role");
+		UniversityStaffMember updatedStaff = new UniversityStaffMember(null,"new_staff","New_pwd@123","new_role");
 		
 		MockHttpSession session = new MockHttpSession();
 		session.setAttribute("staffMember", 1);
@@ -197,7 +197,7 @@ class StaffControllerTest {
 		mockMvc.perform(mockRequest)
 		.andExpect(status().isOk())
 		.andExpect(jsonPath("$", notNullValue()))
-		.andExpect(jsonPath("$.password", is("password2")))
+		.andExpect(jsonPath("$.password", is("Pass@1234")))
 		.andExpect(jsonPath("$.role", is("role2")));
 	}
 	
@@ -228,6 +228,7 @@ class StaffControllerTest {
 		.andExpect(jsonPath("$", notNullValue()))
 		.andExpect(jsonPath("$[1].role", is("role2")))
 		.andExpect(jsonPath("$[2].password", is("*******")));
+		
 	}
 	
 	@Test

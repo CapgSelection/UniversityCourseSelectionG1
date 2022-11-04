@@ -14,6 +14,8 @@ import com.example.UniversityCourseSelectionG1.exception.NotFoundException;
 import com.example.UniversityCourseSelectionG1.repository.ApplicantRepository;
 import com.example.UniversityCourseSelectionG1.repository.CourseRepository;
 
+import org.junit.jupiter.api.Assertions;
+//import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -100,18 +102,21 @@ class ApplicantServiceImplTest {
 	}
 
 	@Test
-	void testViewAllApplicantsByStatus_success() {
-		List<Applicant> applied = new ArrayList<>();
-		applied.add(app1);
-		applied.add(app2);
-		List<Applicant> confirmed = new ArrayList<>();
-		confirmed.add(app3);
+	void testViewAllApplicants_success() {
+		List<Applicant> applicants = new ArrayList<>();
+		applicants.add(app1);
+		applicants.add(app2);
+//		List<Applicant> confirmed = new ArrayList<>();
+//		confirmed.add(app3);
+		
+		Mockito.when(apprepo.viewAllApplicants()).thenReturn(applicants);
 
-		Mockito.when(apprepo.viewAllApplicantByStatus(0)).thenReturn(applied);
-		Mockito.when(apprepo.viewAllApplicantByStatus(1)).thenReturn(confirmed);
+		//Mockito.when(apprepo.viewAllApplicants()).thenReturn(applicants);
+		//Mockito.when(apprepo.viewAllApplicants()).thenReturn(confirmed);
 
-		assertEquals(applied, appservice.viewAllApplicantsByStatus(0));
-		assertEquals(confirmed, appservice.viewAllApplicantsByStatus(1));
+		//assertEquals(applied, appservice.viewAllApplicants());
+		//assertEquals(appservice.viewAllApplicants());
+		Assertions.assertIterableEquals(applicants, apprepo.viewAllApplicants());
 	}
 
 	@Test
@@ -149,10 +154,10 @@ class ApplicantServiceImplTest {
 	}
 	
 	@Test
-	void testViewAllApplicantsByStatus_failure() {
+	void testViewAllApplicants_failure() {
 		List<Applicant> list=null;
-		Mockito.when(apprepo.viewAllApplicantByStatus(3)).thenReturn(list);
-		assertEquals(list, appservice.viewAllApplicantsByStatus(3));
+		Mockito.when(apprepo.viewAllApplicants()).thenReturn(list);
+		assertEquals(list, appservice.viewAllApplicants());
 	}
 
 }

@@ -131,7 +131,7 @@ class ApplicantControllerTest {
 		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.get("/applicant/get/1").session(session)
 				.contentType(MediaType.APPLICATION_JSON);
 
-		mvc.perform(mockRequest).andExpect(status().isOk());
+		mvc.perform(mockRequest).andExpect(status().isFound());
 
 	}
 
@@ -143,7 +143,7 @@ class ApplicantControllerTest {
 		List<Applicant> list = new ArrayList<>();
 		list.add(app1);
 		list.add(app2);
-		Mockito.when(service.viewAllApplicantsByStatus(0)).thenReturn(list);
+		Mockito.when(service.viewAllApplicants()).thenReturn(list);
 
 		String getBody = objectWriter.writeValueAsString(list);
 

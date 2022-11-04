@@ -22,6 +22,7 @@ import com.example.UniversityCourseSelectionG1.entities.Admission;
 import com.example.UniversityCourseSelectionG1.entities.AdmissionCommiteeMember;
 import com.example.UniversityCourseSelectionG1.entities.AdmissionStatus;
 import com.example.UniversityCourseSelectionG1.entities.Applicant;
+import com.example.UniversityCourseSelectionG1.exception.NotFoundException;
 import com.example.UniversityCourseSelectionG1.exception.NotLoggedInException;
 import com.example.UniversityCourseSelectionG1.service.AdmissionCommiteeMemberService;
 import com.example.UniversityCourseSelectionG1.service.ApplicantService;
@@ -71,6 +72,9 @@ public class AdmissionCommiteeMemberController
 			String port = String.valueOf(request.getServerPort());			
 			throw new NotLoggedInException("Accessible to commitee only. If you are a registered commitee member, click http://localhost:"+port+"/login/commitee to login.");
 		}
+		if (member == null) {
+			throw new NotFoundException("Committee Member is Null !");
+		}
 		
 		AdmissionCommiteeMember savedMember= admissionServ.addCommiteeMember(member);
 		return new ResponseEntity<AdmissionCommiteeMember>(savedMember, HttpStatus.OK);
@@ -82,6 +86,9 @@ public class AdmissionCommiteeMemberController
 		if(!checkSession(request, "commitee")) {
 			String port = String.valueOf(request.getServerPort());			
 			throw new NotLoggedInException("Accessible to commitee only. If you are a registered commitee member, click http://localhost:"+port+"/login/commitee to login.");
+		}
+		if (member == null) {
+			throw new NotFoundException("AdmissionCommiteeMember not available");
 		}
 		AdmissionCommiteeMember updatedMember= admissionServ.updateCommiteeMember(member);
 		return new ResponseEntity<AdmissionCommiteeMember>(updatedMember, HttpStatus.OK);
@@ -111,6 +118,10 @@ public class AdmissionCommiteeMemberController
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<String> removeCommiteeMember(@PathVariable int id, HttpServletRequest request)
 	{
+		if(!checkSession(request, "commitee")) {
+			String port = String.valueOf(request.getServerPort());			
+			throw new NotLoggedInException("Accessible to commitee only. If you are a registered commitee member, click http://localhost:"+port+"/login/commitee to login.");
+		}
 		try {
 			admissionServ.removeCommiteeMember(id);
 		} catch (Exception e) {
@@ -142,6 +153,10 @@ public class AdmissionCommiteeMemberController
 		
 		Applicant applicant=applicantService.getById(id).get();
 		Admission admission=applicant.getAdmission();
+		
+		if (applicant == null || admission == null) {
+			throw new NotFoundException("Applicant or Admission is Null !");
+		}
 		
 		AdmissionStatus status=admissionServ.provideAdmissionResult(applicant, admission);
 		

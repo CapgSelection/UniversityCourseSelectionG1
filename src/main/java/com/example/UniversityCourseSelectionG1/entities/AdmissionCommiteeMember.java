@@ -57,10 +57,9 @@ public class AdmissionCommiteeMember {
 		// TODO Auto-generated constructor stub
 	}
 
-	public AdmissionCommiteeMember(int adminId, @NotEmpty(message = "Name can not be empty") String adminName,
-			@Size(min = 10, max = 10) @Pattern(regexp = "^[0-9]*$", message = "Contact can only contain numbers") String adminContact,
-			@Size(min = 3) @Pattern(regexp = "^[a-zA-Z0-9]([._-](?![._-])|[a-zA-Z0-9]){3,18}[a-zA-Z0-9]$", message = "username not in proper format") String adminUsername,
-			@Size(min = 5) @Pattern(regexp = "^[A-Za-z0-9@$!%*#?&]*$", message = "password not in proper format") String adminPassword) {
+	public AdmissionCommiteeMember(int adminId, String adminName, String adminContact,
+			String adminUsername,
+			 String adminPassword) {
 		super();
 		this.adminId = adminId;
 		this.adminName = adminName;

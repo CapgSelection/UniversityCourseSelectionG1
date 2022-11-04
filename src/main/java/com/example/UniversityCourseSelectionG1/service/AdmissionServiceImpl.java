@@ -25,7 +25,7 @@ public class AdmissionServiceImpl implements AdmissionService {
 	@Override
 	public Admission addAdmission(Admission admission){
 		// TODO Auto-generated method stub
-		if((!courseRepo.existsById(admission.getCourseId())) || (applicantRepo.existsById(admission.getApplicantId()))) {
+		if((!courseRepo.existsById(admission.getCourseId()))) {
 			throw new NotFoundException("Can't save admission details");
 		}
 		else
@@ -63,8 +63,9 @@ public class AdmissionServiceImpl implements AdmissionService {
 	@Override
 	public List<Admission> getAdmissionbyCourse(int cId) {
 		// TODO Auto-generated method stub
+		
 		List<Admission> list = admissionRepo.findByCourseId(cId);
-		if(list.isEmpty())
+		if(list==null)
 			throw new NotFoundException("Couse Id not found");
 		else
 			return list;
@@ -74,7 +75,7 @@ public class AdmissionServiceImpl implements AdmissionService {
 	public List<Admission> showAllAdmissionbyDate(LocalDate localdate) {
 		// TODO Auto-generated method stub
 		List<Admission> admissionlist = admissionRepo.findAllAdmissionByAdmissionDate(localdate);	
-		if(admissionlist.isEmpty())
+		if(admissionlist==null)
 			throw new NotFoundException("No student admitted on this date");
 		return admissionlist;
 	}

@@ -16,6 +16,6 @@ public interface ApplicantService {
 
 	Applicant delApplicant(Applicant applicant);
 
-	List<Applicant> viewAllApplicantsByStatus(int status);
+	List<Applicant> viewAllApplicants();
 
 }
