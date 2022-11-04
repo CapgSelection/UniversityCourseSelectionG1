@@ -97,10 +97,11 @@ public class ApplicantController {
 			throw new NotLoggedInException("Please Login to update details, click " + host
 					+ "/login/applicant to login");
 		}
-		
-//		if (applicant == null || applicant.getApplicantId() == null) {
-//			throw new NotFoundException("Applicant or Id can't be null!");
-//		}
+		//int to Integer conversion
+		Integer idInteger = Integer.valueOf(applicant.getApplicantId());
+		if (applicant == null || idInteger == null) {
+			throw new NotFoundException("Applicant or Id can't be null!");
+		}
 		HttpSession session=request.getSession();
 		if(applicant.getApplicantId()!=(int)session.getAttribute("applicant")){
 			throw new NotLoggedInException("You can only update your own details");
@@ -122,9 +123,10 @@ public class ApplicantController {
 							+ "/login/commitee to login.");
 
 		}
-//		if (applicant == null || applicant.getApplicantId() == null) {
-//			throw new NotFoundException("Applicant or Id can't be null!");
-//		}
+		Integer idInteger = Integer.valueOf(applicant.getApplicantId());
+		if (applicant == null || idInteger == null) {
+			throw new NotFoundException("Applicant or Id can't be null!");
+		}
 		HttpSession session=request.getSession();
 		if(applicant.getApplicantId()!=(int)session.getAttribute("applicant")){
 			throw new NotLoggedInException("You can only update your own details");
