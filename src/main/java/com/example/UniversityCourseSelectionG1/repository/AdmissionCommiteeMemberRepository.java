@@ -23,7 +23,4 @@ public interface AdmissionCommiteeMemberRepository extends JpaRepository<Admissi
 	@Query(value="ALTER SEQUENCE admission_commitee_member_admin_id_seq RESTART WITH 1", nativeQuery = true)
 	void resetCommitteeIdSequence();
 
-	
-
-
 }

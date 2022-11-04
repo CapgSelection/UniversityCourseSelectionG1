@@ -22,24 +22,6 @@ public class LoginController {
 	@Autowired
 	private LoginService loginService;
 
-//	@GetMapping("/applicant/{userName}/{password}")	
-//	public ResponseEntity<String> applicantLogin(@PathVariable int userName, @PathVariable String password,
-//			HttpServletRequest request) {
-//		
-//		Integer loggedUser = (Integer)request.getSession().getAttribute("applicant");
-//		if(loggedUser != null && loggedUser == userName) {
-//			return new ResponseEntity<String>("User already logged in!", HttpStatus.FORBIDDEN);
-//		}
-//		
-//		if (loginService.loginAsApplicant(userName, password))
-//		{
-//			HttpSession session = request.getSession(true);
-//			session.setAttribute("applicant", userName);
-//			return new ResponseEntity<>("Logged in successfully!",HttpStatus.OK);
-//		}
-//		return new ResponseEntity<String>("Invalid Credentials", HttpStatus.FORBIDDEN);
-//
-//	}
 	@PostMapping("/applicant/auth")	
 	public ResponseEntity<String> applicantLogin(@RequestBody Authorization auth , HttpServletRequest request) {
 		
@@ -78,21 +60,11 @@ public class LoginController {
 	public ResponseEntity<String> commiteeLogin(@RequestBody Authorization auth , HttpServletRequest request) {
 		
 		Integer loggedUser = (Integer)request.getSession().getAttribute("commitee");
-//<<<<<<< HEAD
-//		if(loggedUser != null && loggedUser == userName) {
-//=======
-//		System.out.println(loggedUser);
 		if(loggedUser != null && loggedUser == auth.getId()) {
-//>>>>>>> branch 'main' of https://github.com/CapgSelection/UniversityCourseSelectionG1.git
 			return new ResponseEntity<String>("User already logged in!", HttpStatus.FORBIDDEN);
 		}
-//<<<<<<< HEAD
-//=======
 	
 		if (loginService.loginAsAdmissionCommiteeMember(auth.getId(), auth.getPass()))
-//>>>>>>> branch 'main' of https://github.com/CapgSelection/UniversityCourseSelectionG1.git
-		
-//		if (loginService.loginAsAdmissionCommiteeMember(userName, password))
 		{
 			HttpSession session = request.getSession(true);
 			session.setAttribute("commitee", auth.getId());

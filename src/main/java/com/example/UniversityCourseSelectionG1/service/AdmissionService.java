@@ -5,8 +5,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 import com.example.UniversityCourseSelectionG1.entities.Admission;
-//import com.example.UniversityCourseSelectionG1.exception.NotFoundException;
-
 
 public interface AdmissionService {
 	Admission addAdmission(Admission admission);

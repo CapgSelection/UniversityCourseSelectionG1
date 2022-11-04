@@ -24,18 +24,13 @@ import com.example.UniversityCourseSelectionG1.entities.Admission;
 import com.example.UniversityCourseSelectionG1.exception.NotFoundException;
 import com.example.UniversityCourseSelectionG1.exception.NotLoggedInException;
 import com.example.UniversityCourseSelectionG1.service.AdmissionService;
-//import com.example.UniversityCourseSelectionG1.service.CourseService;
-
 
 @RestController
 public class AdmissionController {
 	
 	@Autowired
 	private AdmissionService admissionServ;
-	
-//	@Autowired
-//	private CourseService courseServ;
-	
+		
 	public boolean checkSession(HttpServletRequest request, String type) {
 		HttpSession session = request.getSession();
 

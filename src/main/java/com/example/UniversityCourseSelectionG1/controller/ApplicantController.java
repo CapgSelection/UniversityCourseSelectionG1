@@ -27,7 +27,6 @@ import com.example.UniversityCourseSelectionG1.exception.NotFoundException;
 import com.example.UniversityCourseSelectionG1.exception.NotLoggedInException;
 import com.example.UniversityCourseSelectionG1.service.ApplicantService;
 
-
 @RestController
 @RequestMapping("/applicant")
 public class ApplicantController {
@@ -123,14 +122,6 @@ public class ApplicantController {
 							+ "/login/commitee/auth to login.");
 
 		}
-//		Integer idInteger = Integer.valueOf(applicant.getApplicantId());
-//		if (applicant == null || idInteger == null) {
-//			throw new NotFoundException("Applicant or Id can't be null!");
-//		}
-//		HttpSession session=request.getSession();
-//		if(applicant.getApplicantId()!=(int)session.getAttribute("applicant")){
-//			throw new NotLoggedInException("You can only update your own details");
-//		}
 		aplService.delApplicant(id);
 		return new ResponseEntity<String>("Deleted", HttpStatus.OK);
 	}

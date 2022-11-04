@@ -31,67 +31,12 @@ public class AdmissionCommiteeMemeberServiceImpl implements AdmissionCommiteeMem
 	@Autowired
 	private CourseRepository courseRepo;	
 	
-//	public boolean checkValidCommiteeMember(AdmissionCommiteeMember member)
-//	{
-//		int count=0;
-//		Pattern pattern;
-//		Matcher matcher;
-//		//adminName validation
-//		pattern=Pattern.compile("^[A-Za-z\\s]$");
-//		matcher=pattern.matcher(member.getAdminName());
-//		if(matcher.matches())
-//		{
-//			count++;
-//		}
-//		else
-//		{
-//			throw new NotFoundException("adminName can only contain alphabets and spaces");
-//		}
-//		
-//		//contact validation
-//		pattern=Pattern.compile("^[0-9]{10}$");
-//		matcher=pattern.matcher(member.getAdminContact());
-//		if(matcher.matches())
-//		{
-//			count++;
-//		}
-//		else
-//		{
-//			throw new NotFoundException("Contact can only contain numbers");
-//		}
-//		
-//		//username validation
-//		pattern=Pattern.compile("^[A-Za-z]$");
-//		matcher=pattern.matcher(member.getAdminUsername());
-//		if(matcher.matches())
-//		{
-//			count++;
-//		}
-//		else
-//		{
-//			throw new NotFoundException("Username can only contain alphabets and spaces");
-//		}
-//		
-//		
-//		if(count==4)
-//		{
-//			return true;
-//		}
-//		return false;
-//	}
 	
 	@Override
 	public AdmissionCommiteeMember addCommiteeMember(AdmissionCommiteeMember member) 
 	{
 		AdmissionCommiteeMember mem;
-//		if(checkValidCommiteeMember(member))
-//		{
-			mem=repo.save(member);
-//		}
-//		else
-//		{
-//			throw new NotFoundException();
-//		}
+		mem=repo.save(member);
 		return mem;
 	}
 

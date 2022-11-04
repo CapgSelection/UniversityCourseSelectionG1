@@ -36,14 +36,10 @@ public class Admission {
 	@JsonFormat(pattern = "dd-MMM-yyyy")
 	private LocalDate admissionDate;
 
-//	not needed
-//	@OneToOne(mappedBy = "admission")
-//	private Applicant applicant;
 	private AdmissionStatus status;
 	
 	public Admission() {
 		status=AdmissionStatus.PENDING;
-		// TODO Auto-generated constructor stub
 	}
 
 
@@ -94,7 +90,6 @@ public class Admission {
 	public void setAdmissionDate(LocalDate admissionDate) {
 		this.admissionDate = admissionDate;
 	}
-	//added
 	public AdmissionStatus getStatus() {
 		return status;
 	}

@@ -33,7 +33,6 @@ public class UniversityStaffMember {
 	private String staffName;
 	
 	@NotEmpty(message = "Password cannot be empty or null")
-//	@Pattern(regexp="^[A-Za-z0-9@$!%*#?&]*$", message="password not in proper format")
 	@Pattern(regexp="(?=^.{8,}$)(?=.*\\d)(?=.*[!@#$%^&*]+)(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$", message="password not in proper format")
 	private String password;
 	

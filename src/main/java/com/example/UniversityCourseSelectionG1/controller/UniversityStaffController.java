@@ -72,9 +72,6 @@ public class UniversityStaffController {
 
 	@GetMapping("/view/{id}")
 	public ResponseEntity<UniversityStaffMember> viewStaffById(@PathVariable int id, HttpServletRequest request) {
-//		UniversityStaffMember fetchedUSM = usmService.viewStaff(id);
-//		return new ResponseEntity<>(fetchedUSM, HttpStatus.OK);
-//		
 		
 		HttpSession session = request.getSession(true);
 		Integer loginStaffId = null;

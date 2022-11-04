@@ -57,15 +57,6 @@ public class AdmissionCommiteeMemberController
 		return validLogin;
 	}
 	
-//	@GetMapping("/check")
-//	public ResponseEntity<Object> check(HttpServletRequest request)
-//	{
-//		Object ob=request.getSession().getAttributeNames();
-//		System.out.println(ob);
-//		
-//		return new ResponseEntity<Object>(ob, HttpStatus.OK);
-//	}
-	
 	@PostMapping("/add")
 	public ResponseEntity<AdmissionCommiteeMember> addCommiteeMember(@Valid @RequestBody AdmissionCommiteeMember member, HttpServletRequest request)
 	{

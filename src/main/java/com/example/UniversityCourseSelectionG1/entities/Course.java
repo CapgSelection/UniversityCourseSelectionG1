@@ -40,14 +40,12 @@ public class Course {
 	@JsonFormat(pattern="dd-MMM-yyyy")
 	@JsonDeserialize(using = LocalDateDeserializer.class)  
 	@JsonSerialize(using = LocalDateSerializer.class)
-//	@JsonFormat(pattern = "dd-MMM-yyyy")
 	private LocalDate courseStartDate;
 	
 	@Column(name="course_end_date")
 	@JsonFormat(pattern="dd-MMM-yyyy")
 	@JsonDeserialize(using = LocalDateDeserializer.class)  
 	@JsonSerialize(using = LocalDateSerializer.class)
-//	@JsonFormat(pattern = "dd-MMM-yyyy")
 	private LocalDate courseEndDate;
 	
 	@Column(name="course_fees")
@@ -73,7 +71,6 @@ public class Course {
 		this.courseEndDate=of2;
 		this.courseFees=string3;
 		this.courseCriteria=d;
-		// TODO Auto-generated constructor stub
 	}
 
 	

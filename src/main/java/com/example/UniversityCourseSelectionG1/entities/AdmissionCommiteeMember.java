@@ -15,10 +15,6 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-//import lombok.AllArgsConstructor;
-//import lombok.Data;
-//import lombok.NoArgsConstructor;
-
 @Entity
 
 @Table(name="admission_commitee_member", schema = "public")
@@ -49,7 +45,6 @@ public class AdmissionCommiteeMember {
 	private String adminPassword;
 
 	@OneToMany
-//	(cascade = CascadeType.ALL,mappedBy = "admissionCommiteeMember")
 	private List<Applicant> applicants;
 
 	public AdmissionCommiteeMember() {

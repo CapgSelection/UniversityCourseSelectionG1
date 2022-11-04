@@ -53,9 +53,6 @@ public class Applicant {
 
 	@OneToOne
 	Admission admission;
-//	@ManyToOne
-//    @JoinColumn(name = "admissioncommiteeMember_id")
-//    AdmissionCommiteeMember admissionCommiteeMember;
 	
 	AdmissionStatus status;
 
@@ -83,7 +80,6 @@ public class Applicant {
 
 		this.admission = admission;
 		this.status = status;
-//		this.admissionCommiteeMember =admissionCommiteeMember;
 	}
 		public Applicant(int applicantId, String applicantName, String mobileNumber, String applicantDegree,
 				double applicantGraduation, String password, Admission admission) {
@@ -98,15 +94,6 @@ public class Applicant {
 			this.admission = admission;
 		}
 	
-
-//	public AdmissionCommiteeMember getAdmissionCommiteeMember() {
-//		return admissionCommiteeMember;
-//	}
-
-//	public void setAdmissionCommiteeMember(AdmissionCommiteeMember admissionCommiteeMember) {
-//		this.admissionCommiteeMember = admissionCommiteeMember;
-//	}
-
 	public Admission getAdmission() {
 		return admission;
 	}
