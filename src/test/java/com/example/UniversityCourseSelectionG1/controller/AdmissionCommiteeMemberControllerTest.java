@@ -65,6 +65,7 @@ class AdmissionCommitteMemberControllerTest {
 	AdmissionCommiteeMember member2 = new AdmissionCommiteeMember(2, "member_2", "2222", "mem@2", "pass2");
 	AdmissionCommiteeMember member3 = new AdmissionCommiteeMember(3, "member_3", "3333", "mem@3", "pass3");
 
+
 	@Test
 	public void addAddmissioncommiteeMember_success() throws Exception {
 		Mockito.when(commiteeService.addCommiteeMember(member1)).thenReturn(member1);
@@ -121,6 +122,25 @@ class AdmissionCommitteMemberControllerTest {
 		.hasRootCause(new NotFoundException("AdmissionCommiteeMember not available"));
 	}
 
+
+
+	
+
+	@Test
+	void deletecommiteeMember_DoesNotExists() throws Exception {
+		
+		MockHttpSession session = new MockHttpSession();
+		session.setAttribute("commitee", 2);
+		
+		Mockito.doThrow(NotFoundException.class).when(commiteeService).removeCommiteeMember(30);
+
+		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.delete("/uni/commitee/delete/30").session(session)
+				.contentType(MediaType.APPLICATION_JSON);
+		
+		assertThatThrownBy(()-> mockMvc.perform(mockRequest)).hasRootCauseInstanceOf(NotFoundException.class);
+
+	} 
+	
 	
 	
 	@Test
@@ -247,6 +267,7 @@ class AdmissionCommitteMemberControllerTest {
 				.andExpect(jsonPath("$", is("CONFIRMED")));
 	}
 	
+
 	
 	@Test
 	void testGetAdmissionResult_Pending() throws Exception
