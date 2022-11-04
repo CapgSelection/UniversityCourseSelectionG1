@@ -85,8 +85,8 @@ public class ApplicantServiceImpl implements ApplicantService {
 	}
 
 	@Override
-	public List<Applicant> viewAllApplicantsByStatus(int status) {
-		return aplRepository.viewAllApplicantByStatus(status);
+	public List<Applicant> viewAllApplicants() {
+		return aplRepository.viewAllApplicant();
 	}
 
 }

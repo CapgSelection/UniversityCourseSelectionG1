@@ -9,8 +9,8 @@ import com.example.UniversityCourseSelectionG1.entities.Applicant;
 
 public interface ApplicantRepository extends JpaRepository<Applicant, Integer>{
 
-	@Query(value = "select * from Applicant where status=?1", nativeQuery = true)
-	List<Applicant> viewAllApplicantByStatus(int status);
+	@Query(value = "select * from Applicant", nativeQuery = true)
+	List<Applicant> viewAllApplicant();
 	
 	@Query(value="select * from Applicant where Applicant_ID=?1 and Password=?2",nativeQuery = true)
 	Applicant verifyApplicantCredentials(int id, String password);

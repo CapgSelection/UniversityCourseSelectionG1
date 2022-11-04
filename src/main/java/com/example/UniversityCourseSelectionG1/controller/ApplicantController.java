@@ -57,7 +57,7 @@ public class ApplicantController {
 		return new ResponseEntity<Applicant>(applyApl,HttpStatus.ACCEPTED);
 	}
 	
-	@GetMapping("/get/{id}")
+	@GetMapping("/get/{applicantId}")
 	public ResponseEntity<Optional<Applicant>> getApplicantById(@PathVariable int applicantId, HttpServletRequest request)
 	{
 		boolean valid = checkSession(request, "applicant") || checkSession(request, "commitee")
@@ -133,8 +133,8 @@ public class ApplicantController {
 		return new ResponseEntity<String>(HttpStatus.OK);
 	}
 	
-	@GetMapping("/getAll/{status}")
-	public ResponseEntity<List<Applicant>> getAllApplicants(@PathVariable int status, HttpServletRequest request)
+	@GetMapping("/getAll")
+	public ResponseEntity<List<Applicant>> getAllApplicants(HttpServletRequest request)
 	{
 		boolean valid = checkSession(request, "commitee");
 		String host = String.valueOf(request.getServerPort());
@@ -145,8 +145,8 @@ public class ApplicantController {
 
 		}
 		
-		List<Applicant> res = aplService.viewAllApplicantsByStatus(status);
-		return new ResponseEntity<>(res, HttpStatus.OK);
+		List<Applicant> res = aplService.viewAllApplicants();
+		return new ResponseEntity<List<Applicant>>(res, HttpStatus.OK);
 	}
 	
 	
