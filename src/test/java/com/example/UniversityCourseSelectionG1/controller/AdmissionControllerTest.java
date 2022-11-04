@@ -12,14 +12,13 @@ import java.time.format.DateTimeFormatterBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
+
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpSession;
@@ -121,11 +120,11 @@ class AdmissionControllerTest {
 		List<Admission> admissionlist = new ArrayList<>();
 		admissionlist.add(add2);
 		admissionlist.add(add3);
-		Mockito.when(admission_service.getAdmissionbyCourse(add2.getCourseId())).thenReturn(admissionlist);
+		Mockito.lenient().when(admission_service.getAdmissionbyCourse(add2.getCourseId())).thenReturn(admissionlist);
 
 		String getBody = objectWriter.writeValueAsString(admissionlist);
 
-		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.get("/admissions/1").session(session)
+		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.get("/admission/{cId}",2).session(session)
 				.contentType(MediaType.APPLICATION_JSON).content(getBody).accept(MediaType.APPLICATION_JSON);
 
 		mockMvc.perform(mockRequest).andExpect(status().isOk());
@@ -212,7 +211,7 @@ class AdmissionControllerTest {
 		
 		String body = objectWriter.writeValueAsString(admissionlist);
 		
-		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.get("admissions/5")
+		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.get("/admission/{cId}",2)
 				.session(session)
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON)
@@ -220,7 +219,6 @@ class AdmissionControllerTest {
 		
 		assertThatThrownBy(()-> mockMvc.perform(mockRequest))
 		.hasRootCauseInstanceOf(NotLoggedInException.class);
-	
 	}
 	
 	@Test

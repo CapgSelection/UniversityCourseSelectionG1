@@ -75,7 +75,7 @@ class ApplicantControllerTest {
 
 	@Test
 	void testApplyForCourse() throws Exception {
-		Mockito.when(service.applyForCourse(app1)).thenReturn(app1);
+		Mockito.lenient().when(service.applyForCourse(app1)).thenReturn(app1);
 
 		String body = objectWriter.writeValueAsString(app1);
 
@@ -93,7 +93,7 @@ class ApplicantControllerTest {
 		
 		session.setAttribute("applicant", 4);
 
-		Mockito.when(service.updateApplicant(app4)).thenReturn(app4);
+		Mockito.lenient().when(service.updateApplicant(app4)).thenReturn(app4);
 
 		String updatedBody = objectWriter.writeValueAsString(app4);
 
@@ -110,7 +110,7 @@ class ApplicantControllerTest {
 
 		session.setAttribute("applicant", 1);
 
-		Mockito.when(service.delApplicant(app1)).thenReturn(app1);
+		Mockito.lenient().when(service.delApplicant(app1)).thenReturn(app1);
 
 		String delBody = objectWriter.writeValueAsString(app1);
 
@@ -143,7 +143,7 @@ class ApplicantControllerTest {
 		List<Applicant> list = new ArrayList<>();
 		list.add(app1);
 		list.add(app2);
-		Mockito.when(service.viewAllApplicantsByStatus(0)).thenReturn(list);
+		Mockito.when(service.viewAllApplicants()).thenReturn(list);
 
 		String getBody = objectWriter.writeValueAsString(list);
 
