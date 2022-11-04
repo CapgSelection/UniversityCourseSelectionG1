@@ -86,7 +86,7 @@ class ApplicantServiceImplTest {
 		Mockito.when(apprepo.existsById(1)).thenReturn(true);
 		boolean success = true;
 		try {
-			appservice.delApplicant(app1);
+			appservice.delApplicant(1);
 		} catch (Exception e) {
 			success = false;
 		}
@@ -142,7 +142,7 @@ class ApplicantServiceImplTest {
 		Applicant app4=new Applicant();
 		app4.setApplicantId(4);
 		Mockito.when(apprepo.existsById(4)).thenReturn(false);
-		assertThrows(NotFoundException.class,()->appservice.delApplicant(app4));
+		assertThrows(NotFoundException.class,()->appservice.delApplicant(4));
 	}
 	
 	@Test

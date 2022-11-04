@@ -65,12 +65,14 @@ public class ApplicantServiceImpl implements ApplicantService {
 	}
 
 	@Override
-	public void delApplicant(int id) {
+	public Applicant delApplicant(int id) {
 		
 		if(!aplRepository.existsById(id))
 			throw new NotFoundException("Applicant does'nt exist!");
 		
+		Applicant app = aplRepository.findById(id).get();
 			aplRepository.deleteById(id);
+			return app;
 	}
 	
 
