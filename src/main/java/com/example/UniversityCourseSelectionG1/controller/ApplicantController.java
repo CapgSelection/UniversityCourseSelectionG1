@@ -65,7 +65,7 @@ public class ApplicantController {
 		String host = String.valueOf(request.getServerPort());
 		if (!valid) {
 			throw new NotLoggedInException(
-					"Kindly login to view your details.  click " + host + "/login/applicant to login.");
+					"Kindly login to view your details.  click " + host + "/login/applicant/auth to login.");
 
 		}
 		HttpSession session = request.getSession();
@@ -95,7 +95,7 @@ public class ApplicantController {
 		String host = String.valueOf(request.getServerPort());
 		if(!valid) {
 			throw new NotLoggedInException("Please Login to update details, click " + host
-					+ "/login/applicant to login");
+					+ "/login/applicant/auth to login");
 		}
 		//int to Integer conversion
 		Integer idInteger = Integer.valueOf(applicant.getApplicantId());
@@ -111,28 +111,28 @@ public class ApplicantController {
 				
 	}
 	
-	@DeleteMapping("/delete")
-	public ResponseEntity<String> deleteApplicant(@Valid @RequestBody Applicant applicant,HttpServletRequest request) {
+	@DeleteMapping("/delete/{id}")
+	public ResponseEntity<String> deleteApplicant(@PathVariable int id,HttpServletRequest request) {
 		
-		boolean valid = checkSession(request, "applicant");
+		boolean valid = checkSession(request, "commitee");
 		String host = String.valueOf(request.getServerPort());
 		
 		if (!valid) {
 			throw new NotLoggedInException(
 					"Accessible to commitee members only. If you are a registered commitee member, click " + host
-							+ "/login/commitee to login.");
+							+ "/login/commitee/auth to login.");
 
 		}
-		Integer idInteger = Integer.valueOf(applicant.getApplicantId());
-		if (applicant == null || idInteger == null) {
-			throw new NotFoundException("Applicant or Id can't be null!");
-		}
-		HttpSession session=request.getSession();
-		if(applicant.getApplicantId()!=(int)session.getAttribute("applicant")){
-			throw new NotLoggedInException("You can only update your own details");
-		}
-		aplService.delApplicant(applicant);
-		return new ResponseEntity<String>(HttpStatus.OK);
+//		Integer idInteger = Integer.valueOf(applicant.getApplicantId());
+//		if (applicant == null || idInteger == null) {
+//			throw new NotFoundException("Applicant or Id can't be null!");
+//		}
+//		HttpSession session=request.getSession();
+//		if(applicant.getApplicantId()!=(int)session.getAttribute("applicant")){
+//			throw new NotLoggedInException("You can only update your own details");
+//		}
+		aplService.delApplicant(id);
+		return new ResponseEntity<String>("Deleted", HttpStatus.OK);
 	}
 	
 	@GetMapping("/getAll")
@@ -143,7 +143,7 @@ public class ApplicantController {
 		if (!valid) {
 			throw new NotLoggedInException(
 					"Accessible to commitee members only. If you are a registered commitee member, click " + host
-							+ "/login/commitee to login.");
+							+ "/login/commitee/auth to login.");
 
 		}
 		

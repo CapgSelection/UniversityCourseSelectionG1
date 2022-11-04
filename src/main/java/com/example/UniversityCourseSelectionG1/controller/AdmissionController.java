@@ -1,6 +1,7 @@
 package com.example.UniversityCourseSelectionG1.controller;
 
 import java.time.LocalDate;
+
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.util.List;
@@ -23,7 +24,7 @@ import com.example.UniversityCourseSelectionG1.entities.Admission;
 import com.example.UniversityCourseSelectionG1.exception.NotFoundException;
 import com.example.UniversityCourseSelectionG1.exception.NotLoggedInException;
 import com.example.UniversityCourseSelectionG1.service.AdmissionService;
-import com.example.UniversityCourseSelectionG1.service.CourseService;
+//import com.example.UniversityCourseSelectionG1.service.CourseService;
 
 
 @RestController
@@ -32,8 +33,8 @@ public class AdmissionController {
 	@Autowired
 	private AdmissionService admissionServ;
 	
-	@Autowired
-	private CourseService courseServ;
+//	@Autowired
+//	private CourseService courseServ;
 	
 	public boolean checkSession(HttpServletRequest request, String type) {
 		HttpSession session = request.getSession();

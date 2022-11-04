@@ -14,7 +14,7 @@ public interface ApplicantService {
 
 	Applicant updateApplicant(Applicant applicant);
 
-	Applicant delApplicant(Applicant applicant);
+	void delApplicant(int id);
 
 	List<Applicant> viewAllApplicants();
 
