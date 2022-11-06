@@ -1,5 +1,4 @@
 package com.example.UniversityCourseSelectionG1.service;
-//package com.capgemini.UniversityCourseSelection.services;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -106,22 +105,14 @@ class ApplicantServiceImplTest {
 		List<Applicant> applicants = new ArrayList<>();
 		applicants.add(app1);
 		applicants.add(app2);
-//		List<Applicant> confirmed = new ArrayList<>();
-//		confirmed.add(app3);
 		
 		Mockito.when(apprepo.viewAllApplicants()).thenReturn(applicants);
 
-		//Mockito.when(apprepo.viewAllApplicants()).thenReturn(applicants);
-		//Mockito.when(apprepo.viewAllApplicants()).thenReturn(confirmed);
-
-		//assertEquals(applied, appservice.viewAllApplicants());
-		//assertEquals(appservice.viewAllApplicants());
 		Assertions.assertIterableEquals(applicants, apprepo.viewAllApplicants());
 	}
 
 	@Test
 	void testAddApplicant_failure() {
-//		Mockito.when(apprepo.save(app3)).thenThrow(new IllegalArgumentException());
 
 		assertThrows(NotFoundException.class, () -> {
 			appservice.applyForCourse(app3);
@@ -130,7 +121,6 @@ class ApplicantServiceImplTest {
 
 	@Test
 	void testUpdateApplicant_failure() {
-//		Mockito.when(apprepo.save(app3)).thenThrow(new NotFoundException());
 
 		assertThrows(NotFoundException.class, () -> {
 			appservice.applyForCourse(app3);
@@ -147,8 +137,6 @@ class ApplicantServiceImplTest {
 	
 	@Test
 	void testViewApplicant_failure() {
-//		Applicant app4=null;
-//		Mockito.when(apprepo.findById(4)).thenReturn(Optional.ofNullable(app4));
 		Mockito.when(apprepo.existsById(4)).thenReturn(false);
 		assertThrows(NotFoundException.class,()->appservice.getById(4));
 	}

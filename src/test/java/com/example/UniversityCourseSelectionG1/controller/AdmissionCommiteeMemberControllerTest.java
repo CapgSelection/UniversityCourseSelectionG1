@@ -1,5 +1,4 @@
 package com.example.UniversityCourseSelectionG1.controller;
-//package com.capgemini.UniversityCourseSelection.controllers;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.hamcrest.CoreMatchers.is;
@@ -151,23 +150,7 @@ class AdmissionCommitteMemberControllerTest {
 		mockMvc.perform(mockRequest)
 		.andExpect(status().isOk());
 	}
-	
-
-//	@Test
-//	void deletecommiteeMember_DoesNotExists() throws Exception {
-//		
-//		MockHttpSession session = new MockHttpSession();
-//		session.setAttribute("commitee", 2);
-//		
-//		Mockito.doThrow(NotFoundException.class).when(commiteeService).removecommiteeMember(30);
-//
-//		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.delete("/uni/commitee/delete/30").session(session)
-//				.contentType(MediaType.APPLICATION_JSON);
-//		
-//		assertThatThrownBy(()-> mockMvc.perform(mockRequest)).hasRootCauseInstanceOf(NotFoundException.class);
-//
-//	} 
-	
+		
 	
 	@Test
 	void testGetAdmissionResult_Confirmed() throws Exception
@@ -198,7 +181,6 @@ class AdmissionCommitteMemberControllerTest {
 		session.setAttribute("commitee", 2);
 		
 		Admission admission = new Admission(1, 1, 1, LocalDate.of(2022, 3, 10));
-//		Course course=new Course(1,"Maths","10",LocalDate.of(2022, 9, 1),LocalDate.of(2022, 9, 30),"1000",7.0D);
 		Applicant applicant = new Applicant(1, "Adesh", "9475839012", "B.Tech", 5, "pass@1", admission);
 		
 		Mockito.when(applicantService.getById(applicant.getApplicantId())).thenReturn(Optional.of(applicant));

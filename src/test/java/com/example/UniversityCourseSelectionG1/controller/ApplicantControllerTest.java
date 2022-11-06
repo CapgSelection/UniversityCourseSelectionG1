@@ -1,5 +1,4 @@
 package com.example.UniversityCourseSelectionG1.controller;
-//package com.capgemini.UniversityCourseSelection.controllers;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -52,19 +51,15 @@ class ApplicantControllerTest {
 	}
 
 	static Applicant app1 = new Applicant(1, "john", "8318000000", "grad", 9.0, "Pass@1", new Admission());
-//	static Admission add1=new Admission();
 	static Applicant app2 = new Applicant();
 	static Applicant app3 = new Applicant();
 
 	@BeforeAll
 	static void initMethod() {
-//		app1.setApplicantId(1);	
 		app1.getAdmission().setAdmissionId(1);
 		app1.setStatus(AdmissionStatus.APPLIED);
 		app1.getAdmission().setApplicantId(1);
 		app1.getAdmission().setCourseId(10);
-//		app1.getAdmission().setAdmissionDate(LocalDate.of(2022, 9, 2));
-////	app1.setAdmission(add1);
 		app2.setApplicantId(2);
 		app2.setAdmission(new Admission());
 		app3.setApplicantId(3);
@@ -85,35 +80,12 @@ class ApplicantControllerTest {
 
 	}
 
-//	@Test
-//	void updateStaff_success() throws Exception {
-//		Applicant app4 = new Applicant();
-//		app4.setApplicantId(4);
-//		MockHttpSession session = new MockHttpSession();
-//		
-//		session.setAttribute("applicant", 4);
-//
-//		Mockito.lenient().when(service.updateApplicant(app4)).thenReturn(app4);
-//
-//		String updatedBody = objectWriter.writeValueAsString(app4);
-//
-//		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.put("/applicant/update").session(session)
-//				.contentType(MediaType.APPLICATION_JSON).content(updatedBody).accept(MediaType.APPLICATION_JSON);
-//
-//		mvc.perform(mockRequest).andExpect(status().isOk());
-//	}
-
 	@Test
 	void testDeleteApplication_success() throws Exception {
 
 		MockHttpSession session = new MockHttpSession();
 
-		//session.setAttribute("applicant", 1);
 		session.setAttribute("commitee", 1);
-//delete/id
-		//Mockito.lenient().when(service.delApplicant(1)).thenReturn(app1);
-
-		//String delBody = objectWriter.writeValueAsString(app1);
 
 		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.delete("/applicant/delete/1").session(session)
 				.contentType(MediaType.APPLICATION_JSON);
@@ -188,14 +160,11 @@ class ApplicantControllerTest {
 		
 		
 		MockHttpSession session = new MockHttpSession();
-		//Applicant app = new Applicant();
 		session.setAttribute("commitee", 1);
 
-		//String delBody = objectWriter.writeValueAsString(app);
 
 		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.delete("/applicant/delete/100").session(session)
 				.contentType(MediaType.APPLICATION_JSON);
-				//.content(delBody).accept(MediaType.APPLICATION_JSON);
 
 		assertThatThrownBy(() -> mvc.perform(mockRequest)).hasRootCauseInstanceOf(NotFoundException.class);
 	}

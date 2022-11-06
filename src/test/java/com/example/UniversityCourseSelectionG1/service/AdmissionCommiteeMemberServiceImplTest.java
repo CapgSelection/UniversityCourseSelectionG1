@@ -1,5 +1,4 @@
 package com.example.UniversityCourseSelectionG1.service;
-//package com.capgemini.UniversityCourseSelection.services;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -98,14 +97,6 @@ class AdmissionCommitteeMemberServiceImplTest {
 		});
 	}
 	
-//	@Test
-//	public void testUpdateCommitteeMember_failureWhenNull()
-//	{
-//		Mockito.when(repo.existsById(mem.getAdminId())).thenThrow(new IllegalArgumentException());
-//		assertThrows(IllegalArgumentException.class, () -> {
-//			service.updateCommitteeMember(mem);
-//		});
-//	}
 	
 	@Test
 	public void testUpdateCommitteeMember_failureWhenNotFound()
